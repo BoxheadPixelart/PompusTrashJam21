@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using KinematicCharacterController.Examples;
+using KinematicCharacterController.Crab;
 
-namespace KinematicCharacterController.Examples
+namespace KinematicCharacterController.Crab
 {
     public class Teleporter : MonoBehaviour
     {
         public Teleporter TeleportTo;
 
-        public UnityAction<ExampleCharacterController> OnCharacterTeleport;
+        public UnityAction<CrabCharacterController> OnCharacterTeleport;
 
         public bool isBeingTeleportedTo { get; set; }
 
@@ -18,7 +18,8 @@ namespace KinematicCharacterController.Examples
         {
             if (!isBeingTeleportedTo)
             {
-                ExampleCharacterController cc = other.GetComponent<ExampleCharacterController>();
+                //ExampleCharacterController cc = other.GetComponent<ExampleCharacterController>();
+                CrabCharacterController cc = other.GetComponent<CrabCharacterController>();
                 if (cc)
                 {
                     cc.Motor.SetPositionAndRotation(TeleportTo.transform.position, TeleportTo.transform.rotation);
