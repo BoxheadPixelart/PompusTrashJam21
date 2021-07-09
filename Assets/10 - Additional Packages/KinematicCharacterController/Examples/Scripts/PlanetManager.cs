@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using KinematicCharacterController;
-using KinematicCharacterController.Examples;
+using KinematicCharacterController.Crab;
 using System;
 
-namespace KinematicCharacterController.Examples
+namespace KinematicCharacterController.Crab
 {
     public class PlanetManager : MonoBehaviour, IMoverController
     {
@@ -18,7 +18,7 @@ namespace KinematicCharacterController.Examples
         public Teleporter OnPlaygroundTeleportingZone;
         public Teleporter OnPlanetTeleportingZone;
 
-        private List<ExampleCharacterController> _characterControllersOnPlanet = new List<ExampleCharacterController>();
+        private List<CrabCharacterController> _characterControllersOnPlanet = new List<CrabCharacterController>();
         private Vector3 _savedGravity;
         private Quaternion _lastRotation;
 
@@ -45,19 +45,19 @@ namespace KinematicCharacterController.Examples
             _lastRotation = targetRotation;
 
             // Apply gravity to characters
-            foreach (ExampleCharacterController cc in _characterControllersOnPlanet)
+            foreach (CrabCharacterController cc in _characterControllersOnPlanet)
             {
                 cc.Gravity = (PlanetMover.transform.position - cc.transform.position).normalized * GravityStrength;
             }
         }
 
-        void ControlGravity(ExampleCharacterController cc)
+        void ControlGravity(CrabCharacterController cc)
         {
             _savedGravity = cc.Gravity;
             _characterControllersOnPlanet.Add(cc);
         }
 
-        void UnControlGravity(ExampleCharacterController cc)
+        void UnControlGravity(CrabCharacterController cc)
         {
             cc.Gravity = _savedGravity;
             _characterControllersOnPlanet.Remove(cc);
