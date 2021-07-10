@@ -6,8 +6,11 @@ using UnityEngine;
  *      CrabSizeManager has three public functions.
  *      
  *      
- *      int GetCrabSize()
- *      Returns float from 0f to 100f representing size of crab.
+ *      float GetCrabSize()
+ *      Returns float from 0f to 100f representing size of crab from starting size to final size.
+ *      
+ *      float GetCrabSizeRelative()
+ *      Returns float from 0f to 1f representing size of crab from starting size to final size.
  *      
  *      AddSize()
  *      AddSize(float sizeAmt)
@@ -30,7 +33,7 @@ using UnityEngine;
 
         private CrabSizeManager _CrabSizeManager;
   
-*       Paste into Update function
+*       Paste into Start function
 *       -----------------------------------------------------------------------
 
         GameObject __gm = GameObject.FindGameObjectWithTag("GameController");
@@ -43,7 +46,9 @@ using UnityEngine;
  
  */
 
-
+/// <summary>
+/// Component that manages the abstract variable "Size" that controls other behaviors.
+/// </summary>
 public class CrabSizeManager : MonoBehaviour
 {
     // --- Configurable variables 
@@ -58,6 +63,7 @@ public class CrabSizeManager : MonoBehaviour
 
     //[Tooltip("Default Size increase - per second - with every AddSize() call")]
     private float crabSizeDefaultIncrease = 25f;
+
     // Float size tracker of crab, and the last time crab size was reported
     private float _crabSize = 0;
     private float _crabSizeLastReported = 0;
@@ -89,6 +95,11 @@ public class CrabSizeManager : MonoBehaviour
     public float GetCrabSize()
     {
         return _crabSize;
+    }
+
+    public float GetCrabSizeRelative()
+    {
+        return _crabSize / 100f;
     }
 
 
