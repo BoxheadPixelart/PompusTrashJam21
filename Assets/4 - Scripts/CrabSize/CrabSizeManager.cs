@@ -2,6 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*      CRAB Size Manager 
+ *      CrabSizeManager has five public functions.
+ *      
+ *      
+ *      int GetCrabSize()
+ *      Returns int from 0 to crabSizeMaximum representing size of crab. (0 is starting size)
+ *      
+ *      float GetCrabXP()
+ *      Returns a percentage to the nearest hundredth (0 to 0.99) of progress toward the next crab size. If we're at max size, it returns 1f.
+ * 
+ *      AddXP()
+ *      AddXP(int xpAmt)
+ *      Adds xpAmt of XP towards the next size, or the crabXPDefaultIncrease (if no argument supplied).
+ *      
+ *      
+ *      AddSizeChangeListener(Method)
+ *      RemoveSizeChangeListener(Method)
+ *      
+ *      Adds/removes a listener for size changes.  
+ *      
+ *      Size changes return one argument (int sizeDifference), which represents the amount of change from previous size to the next.  This will most likely be 1 (went up) or -1 (went down).
+ *      
+ *      
+ * 
+ *      Paste in declarations for crab size manager
+ *      --------------------------------------------------
+
+        private CrabSizeManager _CrabSizeManager;
+  
+*       Paste into Update function
+*       -----------------------------------------------------------------------
+
+        GameObject __gm = GameObject.FindGameObjectWithTag("GameController");
+
+        _CrabSizeManager = __gm.GetComponentInChildren<CrabSizeManager>();
+
+        if (_CrabSizeManager == null) Debug.Log(this.name.ToString() + " couldn't find CrabSizeManager.");
+        
+        _CrabSizeManager.AddSizeChangeListener(Method);
+ 
+ */
+
+
 public class CrabSizeManager : MonoBehaviour
 {
     // --- Configurable variables 
@@ -70,6 +113,8 @@ public void AddXP() // Add default XP amount to the current XP
 public void AddXP(int xpAmt)
     {
         _addXP(xpAmt);
+
+        //Debug.Log("CRAB SIZE MANAGER: AddXP( " + xpAmt.ToString() + " sent to internal method.");
     }
 
 
@@ -78,9 +123,16 @@ public void AddXP(int xpAmt)
     private void _addXP(int __xpAmt)
     {
         // --- if we've gone in the red, start us at back at zero before adding new XP, to be faaaaaair
+
+        //Debug.Log("CRAB SIZE MANAGER: Internal AddXP: received __xpAmt of " + __xpAmt.ToString());
+
         _sizeXP = Mathf.Max(0, _sizeXP);
 
+        //Debug.Log("CRAB SIZE MANAGER: Internal AddXP set sizeXP to " + _sizeXP.ToString());
+
         _sizeXP += __xpAmt;
+
+        //Debug.Log("CRAB SIZE MANAGER: Internal AddXP added _amt to sizexp, new total is: " + _sizeXP.ToString());
 
         _checkForSizeChange();
     }
