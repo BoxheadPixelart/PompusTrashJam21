@@ -5,15 +5,25 @@ using UnityEngine;
 
 public class TestyMcTestScript : MonoBehaviour
 {
+
+    public GameObject objectToScale;
+    public float maximumScaleSizeAddition = 2f;
+
     private string _myName = "TestMcTestObject: ";
 
     #region Testing the crab size functions
 
     private CrabSizeManager _CrabSizeManager;
     
-    private void SizeChangeReporter(int __diff)
+    private void SizeChangeReporter(float __incomingSize)
     {
-        Debug.Log("SIZE CHANGE REPORTER EVENT: Crab sized changed to " + _CrabSizeManager.GetCrabSize().ToString() + ", a change of " + __diff.ToString());
+        float __size = 1f + Mathf.Min(0.01f * __incomingSize * maximumScaleSizeAddition,maximumScaleSizeAddition);
+
+        Vector3 __vec3Size = new Vector3(__size, __size, __size);
+
+        objectToScale.transform.localScale = __vec3Size;
+
+        Debug.Log("SIZE CHANGE REPORTER EVENT: Crab sized changed to " + __incomingSize.ToString() + ", test object scale is now " + __size.ToString());
 
     }
 
@@ -36,34 +46,10 @@ public class TestyMcTestScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
-        if (Input.GetKeyDown(KeyCode.I)) Debug.Log(_myName + _CrabSizeManager.GetCrabXP().ToString() + " Experience");
-        if (Input.GetKeyDown(KeyCode.K)) Debug.Log(_myName + _CrabSizeManager.GetCrabSize().ToString() + " is current size");
 
-        bool __pressedJ = Input.GetKeyDown(KeyCode.J);
-        bool __pressedL = Input.GetKeyDown(KeyCode.L);
-
-        if (__pressedJ || __pressedL) 
-        {
-            string __text = " 25 XP to crab.";
-            int __amt = 25;
-
-            if (__pressedJ)
-            {
-                __text = "Subtracted" + __text;
-                __amt *= -1;
-            }
-            else __text = "Added " + __text;
-
-            _CrabSizeManager.AddXP(__amt);
-
-            Debug.Log(_myName + __text);
-
-            Debug.Log("UPDATED: " + _CrabSizeManager.GetCrabXP().ToString() + " Experience and current level is: " + _CrabSizeManager.GetCrabSize().ToString());
-
-        }
+        _CrabSizeManager.AddSize();
         
 
     }

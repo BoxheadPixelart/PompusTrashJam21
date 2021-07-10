@@ -3,26 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*      CRAB Size Manager 
- *      CrabSizeManager has five public functions.
+ *      CrabSizeManager has three public functions.
  *      
  *      
  *      int GetCrabSize()
- *      Returns int from 0 to crabSizeMaximum representing size of crab. (0 is starting size)
+ *      Returns float from 0f to 100f representing size of crab.
  *      
- *      float GetCrabXP()
- *      Returns a percentage to the nearest hundredth (0 to 0.99) of progress toward the next crab size. If we're at max size, it returns 1f.
- * 
- *      AddXP()
- *      AddXP(int xpAmt)
- *      Adds xpAmt of XP towards the next size, or the crabXPDefaultIncrease (if no argument supplied).
+ *      AddSize()
+ *      AddSize(float sizeAmt)
+ *      Adds xpAmt of XP towards the next size, or the default amount calculated based on growth over "crabSizeTimeToFullGrown" seconds.
  *      
- *      
+ *      Will accept negative sizeAmt.
+ *
+ *
  *      AddSizeChangeListener(Method)
  *      RemoveSizeChangeListener(Method)
  *      
- *      Adds/removes a listener for size changes.  
+ *      Adds/removes a listener for size changes.  (reports every change of a 0.1 or more of size)
  *      
- *      Size changes return one argument (int sizeDifference), which represents the amount of change from previous size to the next.  This will most likely be 1 (went up) or -1 (went down).
+ *      Size changes return one argument (float newSize), which is the new size float.  
  *      
  *      
  * 
@@ -48,26 +47,26 @@ using UnityEngine;
 public class CrabSizeManager : MonoBehaviour
 {
     // --- Configurable variables 
-    [Tooltip("Max size of crab (Starts at 0)")]
-    public int crabSizeMaximum = 2;
-    [Tooltip("Max XP before leveling up to next size")]
-    public int crabXPMaximum = 100;
-    [Tooltip("Default XP awarded")]
-    public int crabXPDefaultIncrease = 25;
-    [Tooltip("Does crab keep XP gained over maximum")]
-    public bool extraXPRollsOverToNextLevel = true;
-    [Tooltip("Can the crab lose a size level if they lose enough XP")]
-    public bool canCrabLoseSizeLevel = false;
-    [Tooltip("A buffer zone of XP that can be lost before losing a size level")]
-    public int CrabCanBeThisFarIntoNegativeBeforeLosingLevel = 10;
-    // actual size (level?) and current XP 
-    private int _crabSize = 0;
-    private int _sizeXP = 0;
+    [Tooltip("Time (in seconds) it takes crab to reach full size with steady growth")]
+    public float crabSizeTimeToFullGrown = 300f;
+
+    [Tooltip("OnSizeChangeDelegate will report every time growth total exceeds:")]
+    public float reportIfGrowthIsGreaterThan = 0.1f;
+
+
+    private readonly float crabSizeMaximum = 100f;
+
+    //[Tooltip("Default Size increase - per second - with every AddSize() call")]
+    private float crabSizeDefaultIncrease = 25f;
+    // Float size tracker of crab, and the last time crab size was reported
+    private float _crabSize = 0;
+    private float _crabSizeLastReported = 0;
+
 
     #region OnSizeChangeDelegate event methods
 
     // --- the Delegate, for alerting other classes that we've changed XP levels
-    public delegate void OnSizeChangeDelegate(int sizeDifference);
+    public delegate void OnSizeChangeDelegate(float newSize);
     public event OnSizeChangeDelegate OnSizeChange;
 
     public void AddSizeChangeListener(OnSizeChangeDelegate __del)
@@ -87,52 +86,37 @@ public class CrabSizeManager : MonoBehaviour
 
     #region public accessors / setters for XP and size
 
-    public int GetCrabSize()
+    public float GetCrabSize()
     {
         return _crabSize;
     }
 
-public float GetCrabXP() // Returns a percentage to the nearest hundredth (0 to 0.99) of progress toward the next crab size (returns 1f when we are at max size)
+
+
+public void AddSize() // Add default XP amount to the current XP 
     {
-        if (_crabSize == crabSizeMaximum) return 1f;
-        else
-        { 
-            float __per = _sizeXP / crabXPMaximum;
-            __per = Mathf.Round(__per * 100) / 100;
-            return __per;
-        }
+        _addSize(crabSizeDefaultIncrease);
     }
 
 
-public void AddXP() // Add default XP amount to the current XP 
+public void AddSize(float __sizeAmt)
     {
-        _addXP(crabXPDefaultIncrease);
-    }
-
-
-public void AddXP(int xpAmt)
-    {
-        _addXP(xpAmt);
-
-        //Debug.Log("CRAB SIZE MANAGER: AddXP( " + xpAmt.ToString() + " sent to internal method.");
+        _addSize(__sizeAmt);
     }
 
 
     #endregion
 
-    private void _addXP(int __xpAmt)
+    private void Start()
     {
-        // --- if we've gone in the red, start us at back at zero before adding new XP, to be faaaaaair
+        crabSizeDefaultIncrease = (crabSizeMaximum/60)/crabSizeTimeToFullGrown;
+    }
 
-        //Debug.Log("CRAB SIZE MANAGER: Internal AddXP: received __xpAmt of " + __xpAmt.ToString());
 
-        _sizeXP = Mathf.Max(0, _sizeXP);
 
-        //Debug.Log("CRAB SIZE MANAGER: Internal AddXP set sizeXP to " + _sizeXP.ToString());
-
-        _sizeXP += __xpAmt;
-
-        //Debug.Log("CRAB SIZE MANAGER: Internal AddXP added _amt to sizexp, new total is: " + _sizeXP.ToString());
+    private void _addSize(float __sizeAmt)
+    {
+        _crabSize = Mathf.Clamp(_crabSize +__sizeAmt,0f,crabSizeMaximum);
 
         _checkForSizeChange();
     }
@@ -141,34 +125,20 @@ public void AddXP(int xpAmt)
 
 private void _checkForSizeChange() // Checks if we've exceeded the XP limit in either direction
     {
+        float __diff = Mathf.Abs(_crabSize - _crabSizeLastReported);
 
-        int __oldSize = _crabSize;
-
-        if (_sizeXP >= crabXPMaximum)
+        if(__diff >= reportIfGrowthIsGreaterThan)
         {
-            _crabSize = Mathf.Min(_crabSize + 1,crabSizeMaximum);
-
-            if (extraXPRollsOverToNextLevel) _sizeXP = crabXPMaximum - _sizeXP;
-            else _sizeXP = 0;
-        }
-        else if(_sizeXP < -CrabCanBeThisFarIntoNegativeBeforeLosingLevel && canCrabLoseSizeLevel)
-        {
-            _crabSize = Mathf.Max(0, _crabSize - 1);
-
-            if (_crabSize != __oldSize) _sizeXP = Mathf.Max(crabXPMaximum + _sizeXP,-CrabCanBeThisFarIntoNegativeBeforeLosingLevel); // if we're here, _sizeXP is less than 0, so we're remembering how much we lost and applying the difference to the previous level
-            else _sizeXP = -CrabCanBeThisFarIntoNegativeBeforeLosingLevel; // if new crabSize is same as old, we're at 0, and we're going to clamp the _sizeXP loss to our negative buffer amount
-            
-        }
-
-    if(__oldSize != _crabSize) // ok, we changed sizes for real, LET 'EM KNOW
-        {
-            if(OnSizeChange != null) // if this actually has any listeners in it, send the difference in size change
+            if (OnSizeChange != null) // if this actually has any listeners in it, send the difference in size change
             {
-                OnSizeChange(_crabSize - __oldSize);
+
+                OnSizeChange(_crabSize);
+                _crabSizeLastReported = _crabSize;
 
             }
-        }
 
+        }
+ 
     }
 
 
