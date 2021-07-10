@@ -4,6 +4,7 @@ using UnityEngine;
 using KinematicCharacterController;
 using KinematicCharacterController.Crab;
 
+
 namespace KinematicCharacterController.Crab
 {
     public class CrabPlayer : MonoBehaviour
@@ -31,10 +32,10 @@ namespace KinematicCharacterController.Crab
 
         private void Update()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-            }
+          //  if (Input.GetMouseButtonDown(0))
+           // {
+            //    Cursor.lockState = CursorLockMode.Locked;
+           //```` }
 
             HandleCharacterInput();
         }
@@ -54,7 +55,7 @@ namespace KinematicCharacterController.Crab
         private void HandleCameraInput()
         {
             // Create the look input vector for the camera
-            float mouseLookAxisUp = Input.GetAxisRaw(MouseYInput);
+            float mouseLookAxisUp = Input.GetAxisRaw(MouseYInput); 
             float mouseLookAxisRight = Input.GetAxisRaw(MouseXInput);
             Vector3 lookInputVector = new Vector3(mouseLookAxisRight, mouseLookAxisUp, 0f);
 
@@ -74,10 +75,10 @@ namespace KinematicCharacterController.Crab
             CharacterCamera.UpdateWithInput(Time.deltaTime, scrollInput, lookInputVector);
 
             // Handle toggling zoom level
-            if (Input.GetMouseButtonDown(1))
-            {
-                CharacterCamera.TargetDistance = (CharacterCamera.TargetDistance == 0f) ? CharacterCamera.DefaultDistance : 0f;
-            }
+       //     if (Input.GetMouseButtonDown(1))
+         //   {
+            //    CharacterCamera.TargetDistance = (CharacterCamera.TargetDistance == 0f) ? CharacterCamera.DefaultDistance : 0f;
+          //  }
         }
 
         private void HandleCharacterInput()
