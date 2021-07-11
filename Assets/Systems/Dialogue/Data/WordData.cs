@@ -7,4 +7,5 @@ public class WordData : ScriptableObject
     public Mesh mesh;
     public Vector3 offsetRotation;
     public Vector3 size; 
+
 }
