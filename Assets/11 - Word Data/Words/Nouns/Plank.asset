@@ -10,6 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22de16bebe2a13c4f8ad0d5e783d338c, type: 3}
-  m_Name: New WordData
+  m_Name: Plank
   m_EditorClassIdentifier: 
-  name: 
+  name: Plank
+  mesh: {fileID: 4300000, guid: 190c74b3fa6719446b1758497167196e, type: 3}
+  offsetRotation: {x: 0, y: 0, z: 25}
+  size: {x: 1, y: 1, z: 1}
