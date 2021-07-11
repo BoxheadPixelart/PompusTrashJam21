@@ -5,56 +5,35 @@ using UnityEngine;
 
 public class TestyMcTestScript : MonoBehaviour
 {
-
-    public GameObject objectToScale;
-    public float maximumScaleSizeAddition = 2f;
-
     private string _myName = "TestMcTestObject: ";
 
-    #region Testing the crab size functions
+    public GameObject Player;
+    public GameObject Shell;
 
-    private CrabSizeManager _CrabSizeManager;
-    
-    private void SizeChangeReporter(float __incomingSize)
+    private bool mounted = false;
+    private ShellManager shellManager;
+
+    private void Start()
     {
-        float __size = 1f + Mathf.Min(0.01f * __incomingSize * maximumScaleSizeAddition,maximumScaleSizeAddition);
+        shellManager = Player.GetComponentInChildren<ShellManager>();
 
-        Vector3 __vec3Size = new Vector3(__size, __size, __size);
-
-        objectToScale.transform.localScale = __vec3Size;
-
-        Debug.Log("SIZE CHANGE REPORTER EVENT: Crab sized changed to " + __incomingSize.ToString() + ", test object scale is now " + __size.ToString());
-
+        Debug.Log("Press Q to wear / take off the shell.  Still need to figure out how to scale the mounting point position without scaling the shell you're wearing.");
     }
 
-
-
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        GameObject __gm = GameObject.FindGameObjectWithTag("GameController");
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            if (!mounted) shellManager.EquipShell(Shell);
+            else shellManager.UnequipShell();
 
-        _CrabSizeManager = __gm.GetComponentInChildren<CrabSizeManager>();
-
-        if (_CrabSizeManager == null) Debug.Log(this.name.ToString() + " couldn't find CrabSizeManager.");
-        //else Debug.Log(_myName + "Found the crab size manager.");
-
-        // Add my listening method HOPEFULLY OMG
-        _CrabSizeManager.AddSizeChangeListener(SizeChangeReporter);
+            mounted = !mounted;
 
 
+
+        }
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-
-        _CrabSizeManager.AddSize();
-        
-
-    }
-
-    #endregion
 
 
 }

@@ -11,14 +11,23 @@ public class ShellManager : MonoBehaviour
         
     */
 
-    public GameObject Player;
-    public GameObject ShellMountingPoint;
+    public GameObject PlayerHolder;
+    public Transform playerMountingPoint;
+
+
+    private KinematicCharacterController.Crab.CrabCharacterController characterController;
+
     private GameObject currentShell;
+    private Transform shellMountingPoint;
+    private Collider shellCollider;
+    private WearableShell shellClass;
+    private WearableShell.ShellData shellData;
+    private WearableShell.ShellData nullShellData;
 
     #region OnShellChangeDelegate event methods
 
     // --- the Delegate, for alerting other classes that we've changed XP levels
-    public delegate void OnShellChangeDelegate(bool wearingShell);
+    public delegate void OnShellChangeDelegate(bool wearingShell,WearableShell.ShellData shellData);
     public event OnShellChangeDelegate OnShellChange;
 
     public void AddShellChangeListener(OnShellChangeDelegate __del)
@@ -40,7 +49,9 @@ public class ShellManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("Current shell status is " + ShellStatus().ToString());
+        characterController = PlayerHolder.GetComponentInChildren<KinematicCharacterController.Crab.CrabCharacterController>();
+
     }
 
 
@@ -58,11 +69,58 @@ public class ShellManager : MonoBehaviour
             UnequipShell();
         }
 
+        // Get all the associated data for the shell
+        currentShell = __shell;
+        shellMountingPoint = __shell.transform;
+        shellClass = __shell.GetComponent<WearableShell>();
+        shellData = shellClass.GetShellData();
+        shellCollider = __shell.GetComponentInChildren<Collider>();
+
+        // register the collider with the character controller so we don't go ZOOMING away
+        characterController.RegisterCollider(shellCollider);
+
+        // Physically bring the shell to us
+        MountShell(shellMountingPoint);
+
+        // Notify everyone of the new shell
+        OnShellChange(true, shellData);
 
     }
 
     public void UnequipShell()
     {
+
+        // Run the "pop off the shell" function
+        UnmountShell();
+
+        shellMountingPoint = null;
+        shellClass = null;
+        currentShell = null;
+
+
+        characterController.DeregisterCollider(shellCollider);
+
+        // Notify everyone of the null shell
+        OnShellChange(false, nullShellData);
+
+    }
+
+    private void MountShell(Transform __shellMP)
+    {
+        __shellMP.SetParent(playerMountingPoint, true);
+        __shellMP.transform.localPosition = new Vector3(0f, 0f, 0f);
+        __shellMP.transform.localRotation = new Quaternion(0f, 0f, 0f,0f);
+
+
+    }
+
+    private void UnmountShell()
+    {
+        if(shellMountingPoint != null)
+        {
+            shellMountingPoint.SetParent(null);
+
+        }
 
     }
 

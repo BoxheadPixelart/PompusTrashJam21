@@ -100,6 +100,12 @@ public class CrabGrowthController : MonoBehaviour
     }
 
 
+    private void FixedUpdate()
+    {
+        _CrabSizeManager.AddSize();
+    }
+
+
     private float ShellDebuffMultiplier(float __size)
     {
         if (!_wearingShell) return 1;
@@ -116,7 +122,7 @@ public class CrabGrowthController : MonoBehaviour
 
     }
 
-    private void ShellUpdate(bool __wearingShell)
+    private void ShellUpdate(bool __wearingShell,WearableShell.ShellData shellData)
     {
         _wearingShell = __wearingShell;
 
