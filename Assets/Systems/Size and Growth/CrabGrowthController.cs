@@ -44,12 +44,18 @@ public class CrabGrowthController : MonoBehaviour
             private CapsuleCollider _capsuleCollider;
             private Rigidbody _rigidBody;
 
+    public ShellManager _ShellManager;
+    private WearableShell.ShellData _shellData;
+
+
+
     [SerializeField]
     public SizeVariables startingSize;
 
     [SerializeField]
     public SizeVariables endingSize;
 
+    [SerializeField]
     private float size = 0f;
 
 
@@ -69,9 +75,7 @@ public class CrabGrowthController : MonoBehaviour
     // ---- Connect to the crabSizeManager
     private CrabSizeManager _CrabSizeManager;
 
-    // ---- Connect to ShellManager
-    private ShellManager _ShellManager;
-
+    
     // --- Connect to character motor
     private KinematicCharacterMotor _CharMotor;
 
@@ -89,7 +93,6 @@ public class CrabGrowthController : MonoBehaviour
         // Prepare our KinematicCharacterMotor
         _CharMotor = this.GetComponent<KinematicCharacterMotor>();
 
-        _ShellManager = this.GetComponent<ShellManager>();
         _ShellManager.AddShellChangeListener(ShellUpdate);
 
         _cameraScript = PlayerCameraObject.GetComponent<KinematicCharacterController.Crab.CrabCharacterCamera>();
@@ -110,7 +113,15 @@ public class CrabGrowthController : MonoBehaviour
     {
         if (!_wearingShell) return 1;
 
-        if (__size < _shellSizeMinimum) return 0;
+        if (__size < _shellData.minSize) return 0.05f;
+
+        if(__size > _shellData.maxSize)
+        {
+            _ShellManager.UnequipShell();
+
+            return 1;
+        }
+
 
         float __multi = 1;
 
@@ -126,6 +137,9 @@ public class CrabGrowthController : MonoBehaviour
     {
         _wearingShell = __wearingShell;
 
+        _shellData = shellData;
+
+
         // We store "size" so we can call a size update manually if need be, when we switch shells
         SizeUpdate(size);
     }
@@ -136,6 +150,7 @@ public class CrabGrowthController : MonoBehaviour
 
         float _shellDebuffMultiplier = ShellDebuffMultiplier(__size);
         
+
 
         __size = Mathf.Clamp(__size * 0.01f,0f,1f); // __size can now be used as a 0-1 lerp
 
@@ -199,11 +214,14 @@ public class CrabGrowthController : MonoBehaviour
         float __jumpUpSpeed = Mathf.Lerp(startingSize.characterJumpUpSpeed, endingSize.characterJumpUpSpeed, __size) * _shellDebuffMultiplier;
 
 
+
         _charController.MaxStableMoveSpeed = __stableMovement;
         _charController.StableMovementSharpness = __stableMovementSharpness;
         _charController.OrientationSharpness = __orientationSharpness;
         _charController.MaxAirMoveSpeed = __airMoveSpeed;
         _charController.AirAccelerationSpeed = __airAccelerationSpeed;
+
+
 
         #endregion
 

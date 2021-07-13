@@ -395,7 +395,6 @@ GameObject:
   - component: {fileID: 2441900163736942901}
   - component: {fileID: 8485171288820873211}
   - component: {fileID: 2340514096585350934}
-  - component: {fileID: 6820248661102423562}
   - component: {fileID: 6820248661102423567}
   m_Layer: 0
   m_Name: CrabCharacter
@@ -524,20 +523,6 @@ MonoBehaviour:
   MeshRoot: {fileID: 2338911667549931325}
   CameraFollowPoint: {fileID: 2336223611676564585}
   CrouchedCapsuleHeight: 1
---- !u!114 &6820248661102423562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2341824941596714567}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92c1ee5b93ce0bb45b1a9d98f7c9ca9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerHolder: {fileID: 2340514096984420660}
-  playerMountingPoint: {fileID: 6820248661593237997}
 --- !u!114 &6820248661102423567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,6 +537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParentObjectToPhysicallyScale: {fileID: 2339870522951400497}
   PlayerCameraObject: {fileID: 2341255800924898225}
+  _ShellManager: {fileID: 5343931290044363935}
   startingSize:
     characterScale: 1
     rigidbodyMass: 1
@@ -682,6 +668,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6820248661593237997}
+  - component: {fileID: 5343931290044363935}
   m_Layer: 0
   m_Name: mountingPoint
   m_TagString: Untagged
@@ -703,3 +690,17 @@ Transform:
   m_Father: {fileID: 2335761260168882773}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5343931290044363935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6820248661593237996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92c1ee5b93ce0bb45b1a9d98f7c9ca9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerHolder: {fileID: 2340514096984420660}
+  playerMountingPoint: {fileID: 6820248661593237997}
