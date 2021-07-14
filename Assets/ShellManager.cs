@@ -23,6 +23,8 @@ public class ShellManager : MonoBehaviour
     private WearableShell shellClass;
     private WearableShell.ShellData shellData;
     private WearableShell.ShellData nullShellData;
+    private Rigidbody shellRigidbody;
+
 
     #region OnShellChangeDelegate event methods
 
@@ -79,6 +81,10 @@ public class ShellManager : MonoBehaviour
         // register the collider with the character controller so we don't go ZOOMING away
         characterController.RegisterCollider(shellCollider);
 
+        shellRigidbody = currentShell.GetComponentInChildren<Rigidbody>();
+        
+        shellRigidbody.isKinematic = true;
+
         // Physically bring the shell to us
         MountShell(shellMountingPoint);
 
@@ -93,10 +99,12 @@ public class ShellManager : MonoBehaviour
         // Run the "pop off the shell" function
         UnmountShell();
 
+        shellRigidbody.isKinematic = false;
+
         shellMountingPoint = null;
         shellClass = null;
         currentShell = null;
-
+        shellRigidbody = null;
 
         characterController.DeregisterCollider(shellCollider);
 
@@ -107,6 +115,7 @@ public class ShellManager : MonoBehaviour
 
     private void MountShell(Transform __shellMP)
     {
+
         __shellMP.SetParent(playerMountingPoint, true);
         __shellMP.transform.localPosition = new Vector3(0f, 0f, 0f);
         __shellMP.transform.localRotation = new Quaternion(0f, 0f, 0f,0f);
