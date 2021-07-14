@@ -525,5 +525,18 @@ namespace KinematicCharacterController.Crab
         public void OnDiscreteCollisionDetected(Collider hitCollider)
         {
         }
+
+        public void RegisterCollider(Collider col)
+        {
+            IgnoredColliders.Add(col);
+        }
+
+        public void DeregisterCollider(Collider col)
+        {
+            IgnoredColliders.Remove(col);
+
+        }
+
+
     }
 }

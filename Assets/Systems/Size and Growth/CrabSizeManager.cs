@@ -90,7 +90,7 @@ public class CrabSizeManager : MonoBehaviour
     #endregion
 
 
-    #region public accessors / setters for XP and size
+    #region public accessors / setters for Size
 
     public float GetCrabSize()
     {

@@ -23,6 +23,7 @@ public class SizeVariables
     public float characterMaxStableSlopeAngle = 60;
     public float characterMaxStepHeight = 1;
     public float characterOrentationSharpness = 8;
+    public float characterJumpUpSpeed = 10;
     public float characterAirMoveSpeed = 15;
     public float characterAirAccelerationSpeed = 15;
     
@@ -33,7 +34,7 @@ public class SizeVariables
 /// <summary>
 /// Component that manages actual scaling of Crab.
 /// </summary>
-public class CrabGrowthManager : MonoBehaviour
+public class CrabGrowthController : MonoBehaviour
 {
     public GameObject ParentObjectToPhysicallyScale;
     public GameObject PlayerCameraObject;
@@ -49,11 +50,32 @@ public class CrabGrowthManager : MonoBehaviour
     [SerializeField]
     public SizeVariables endingSize;
 
+    private float size = 0f;
+
+
+    // Shell variables
+    // these will be sent to us by the shell, but we are using defaults for now
+    private bool _wearingShell = false;
+
+    private float _shellSizeMinimum = 0f;
+    private float _shellSizeMaximum = 100f;
+                  
+    private float _shellSpeedDebuffAtMinimum = 0.5f; // below minimum size, debuff multiplier is 0
+    private float _shellSpeedDebuffAtMaximum = 0.25f; 
+
+
+
+
     // ---- Connect to the crabSizeManager
     private CrabSizeManager _CrabSizeManager;
+
+    // ---- Connect to ShellManager
+    private ShellManager _ShellManager;
+
+    // --- Connect to character motor
     private KinematicCharacterMotor _CharMotor;
 
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -67,6 +89,8 @@ public class CrabGrowthManager : MonoBehaviour
         // Prepare our KinematicCharacterMotor
         _CharMotor = this.GetComponent<KinematicCharacterMotor>();
 
+        _ShellManager = this.GetComponent<ShellManager>();
+        _ShellManager.AddShellChangeListener(ShellUpdate);
 
         _cameraScript = PlayerCameraObject.GetComponent<KinematicCharacterController.Crab.CrabCharacterCamera>();
         _camera = PlayerCameraObject.GetComponent<Camera>();
@@ -76,9 +100,41 @@ public class CrabGrowthManager : MonoBehaviour
     }
 
 
+    private void FixedUpdate()
+    {
+        _CrabSizeManager.AddSize();
+    }
+
+
+    private float ShellDebuffMultiplier(float __size)
+    {
+        if (!_wearingShell) return 1;
+
+        if (__size < _shellSizeMinimum) return 0;
+
+        float __multi = 1;
+
+        float _lerpVal = (__size - _shellSizeMinimum) / (_shellSizeMaximum - _shellSizeMinimum);
+
+        __multi = Mathf.Lerp(_shellSpeedDebuffAtMinimum, _shellSpeedDebuffAtMaximum, _lerpVal);
+
+        return __multi;
+
+    }
+
+    private void ShellUpdate(bool __wearingShell,WearableShell.ShellData shellData)
+    {
+        _wearingShell = __wearingShell;
+
+        // We store "size" so we can call a size update manually if need be, when we switch shells
+        SizeUpdate(size);
+    }
+
     private void SizeUpdate(float __size)
     {
+        size = __size; 
 
+        float _shellDebuffMultiplier = ShellDebuffMultiplier(__size);
         
 
         __size = Mathf.Clamp(__size * 0.01f,0f,1f); // __size can now be used as a 0-1 lerp
@@ -109,7 +165,6 @@ public class CrabGrowthManager : MonoBehaviour
 
 
         _CharMotor.SetCapsuleDimensions(__radius, __height, __yOffset);
-        return;
         _CharMotor.MaxStableSlopeAngle = __maxStableSlopeAngle;
         _CharMotor.MaxStepHeight = __maxStepHeight;
         _CharMotor.SimulatedCharacterMass = __rigidbodyMass;
@@ -136,11 +191,13 @@ public class CrabGrowthManager : MonoBehaviour
 
 
         #region // Char Controller
-        float __stableMovement = Mathf.Lerp(startingSize.characterStableMovementSpeed, endingSize.characterStableMovementSpeed, __size);
+        float __stableMovement = Mathf.Lerp(startingSize.characterStableMovementSpeed, endingSize.characterStableMovementSpeed, __size) * _shellDebuffMultiplier;
         float __stableMovementSharpness = Mathf.Lerp(startingSize.characterStableMovementSharpness, endingSize.characterStableMovementSharpness, __size);
         float __orientationSharpness = Mathf.Lerp(startingSize.characterOrentationSharpness, endingSize.characterOrentationSharpness, __size);
-        float __airMoveSpeed = Mathf.Lerp(startingSize.characterAirMoveSpeed, endingSize.characterAirMoveSpeed, __size);
-        float __airAccelerationSpeed = Mathf.Lerp(startingSize.characterAirAccelerationSpeed, endingSize.characterAirAccelerationSpeed, __size);
+        float __airMoveSpeed = Mathf.Lerp(startingSize.characterAirMoveSpeed, endingSize.characterAirMoveSpeed, __size) * _shellDebuffMultiplier;
+        float __airAccelerationSpeed = Mathf.Lerp(startingSize.characterAirAccelerationSpeed, endingSize.characterAirAccelerationSpeed, __size) * _shellDebuffMultiplier;
+        float __jumpUpSpeed = Mathf.Lerp(startingSize.characterJumpUpSpeed, endingSize.characterJumpUpSpeed, __size) * _shellDebuffMultiplier;
+
 
         _charController.MaxStableMoveSpeed = __stableMovement;
         _charController.StableMovementSharpness = __stableMovementSharpness;
