@@ -37,7 +37,7 @@ public class ItemBase : InteractableBase
     {
         Vector3 heading = (pickupTarget.position - rb.position);
         rb.velocity += (heading * (25) - rb.velocity) * 0.75f;
-        gItemDir = holder.handJoint.rotation.eulerAngles;
+        gItemDir = holder.rotation.eulerAngles;
         SpringRotateToHand();
     }
 
@@ -47,12 +47,12 @@ public class ItemBase : InteractableBase
         Quaternion rot = Quaternion.LookRotation(look, Vector3.up);
         rb.rotation = rot;
     }
-    public void Pickup(Transform pT, SneakArmBase hold)
+    public void Pickup(Transform pT, Transform hold)
     {
         gameObject.layer = LayerMask.NameToLayer("ItemHeld");
         pickupTarget = pT;
         isPickedUp = true;
-        stats = hold.stats;
+        //stats = hold.stats;
         holder = hold;
     }
 
