@@ -5,24 +5,40 @@ using UnityEngine;
 public class InteractionManager : MonoBehaviour
 {
     public List<Transform> nearbyInteracts = new List<Transform>();
-    public Transform playerRoot; 
+    public Transform playerRoot;
+    public Transform grabPoint; 
     public KeyCode InteractKey;
+    public bool canInteract; 
     // Start is called before the first frame update
     void Start()
     {
-        
+        canInteract = true; 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(InteractKey))
-        {
-            print("E pressed"); 
-            InteractableBase interact = GetClosestEnemy(nearbyInteracts, playerRoot).gameObject.GetComponent<InteractableBase>();
-            print(interact);
-            interact.InteractAction(); 
-        }
+       if (Input.GetKeyDown(InteractKey))
+       {
+            if (canInteract) // this is ugly and you should feel bad, break this into methods later 
+            {
+                print("E pressed");
+                InteractableBase interact = GetClosestEnemy(nearbyInteracts, playerRoot).gameObject.GetComponent<InteractableBase>();
+                print(interact);
+                if (interact.GetType() == typeof(WearableShell))
+                {
+                    interact.InteractAction(this);
+
+                    print("YOU HAVE FOUND A SHELL");
+                }
+                if (interact.GetType() == typeof(ItemBase))
+                {
+                    interact.InteractAction(this);
+                    print("YOU HAVE FOUND An ITEM");
+                }
+                // do one more for NPCS LATER
+            }
+       }
         
     }
     //

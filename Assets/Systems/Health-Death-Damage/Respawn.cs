@@ -19,7 +19,7 @@ public class Respawn : DeathManager
         if(DefaultRespawnPoint == null)
         {
 
-            GameObject respwn = Instantiate(Object EmptyObject);
+          // GameObject respwn = Instantiate(Object, EmptyObject);
 
         }
 

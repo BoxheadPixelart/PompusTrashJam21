@@ -11,6 +11,21 @@ public class ItemBase : InteractableBase
     private Collider collider;
     private Renderer renderer;
     //
+    public Rigidbody Rb
+    {
+        get {
+            if (rb is null)
+            {
+                rb = GetComponent<Rigidbody>(); 
+            }
+            return rb; 
+        }
+        set
+        {
+            rb = value; 
+        }
+       
+    }
     private Transform holder;
     private Vector3 itemDir;
     private Vector3 gItemDir;
@@ -19,24 +34,37 @@ public class ItemBase : InteractableBase
     //
     bool isPickedUp;
     public Transform pickupTarget;
-    public Vector3 velo;
-    public Transform rotTarget;
-    // Start is called before the first frame update
+
     void Start()
     {
-        
+        SetInteract(true);
+        rb.GetComponent<Rigidbody>(); 
     }
-
-    // Update is called once per frame
-    public override void Action()
+    private void FixedUpdate()
     {
+   
+        if (isPickedUp)
+        {
+            MoveToGrabPoint();
+        }
+        else
+        {
+            itemDir = Rb.rotation.eulerAngles;
+        }
+    }
+    // Update is called once per frame
+    public override void Action(InteractionManager manager)
+    {
+        pickupTarget = manager.grabPoint;
+        Pickup(manager.grabPoint,manager.playerRoot); 
         print("Item has been picked up");
     }
     //
-    public void MoveToHand()
+    public void MoveToGrabPoint()
     {
-        Vector3 heading = (pickupTarget.position - rb.position);
-        rb.velocity += (heading * (25) - rb.velocity) * 0.75f;
+        print(Rb); 
+        Vector3 heading = (pickupTarget.position - Rb.position);
+        rb.velocity += (heading * (25) - Rb.velocity) * 0.75f;
         gItemDir = holder.rotation.eulerAngles;
         SpringRotateToHand();
     }
@@ -65,15 +93,15 @@ public class ItemBase : InteractableBase
     }
     public void SetVelocity(Vector3 desiredVelocity)
     {
-        rb.velocity = desiredVelocity;
+        Rb.velocity = desiredVelocity;
     }
     public void AddVelocity(Vector3 desiredVelocity)
     {
-        rb.velocity += desiredVelocity;
+        Rb.velocity += desiredVelocity;
     }
     public void ResetAngularVelocity()
     {
-        rb.angularVelocity = Vector3.zero;
+        Rb.angularVelocity = Vector3.zero;
     }
     //
 }

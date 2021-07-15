@@ -27,7 +27,7 @@ public class WearableShell : InteractableBase
         SetInteract(true); 
     }
 
-    public override void Action()
+    public override void Action(InteractionManager manager)
     {
         print("Shell has been picked up");
         shellManager.EquipShell(transform.parent.gameObject); 
