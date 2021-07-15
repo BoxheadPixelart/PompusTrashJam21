@@ -6,15 +6,15 @@ public class InteractableBase : MonoBehaviour
 {
     public bool canInteract;
     // Start is called before the first frame update
-    private void Start()
-    {
-        canInteract = true; 
-    }
     public void InteractAction()
     {
+        print("Interact Action has been Called");
+        print("Can Interract is: " + canInteract );
         if (canInteract)
         {
-            canInteract = false; 
+
+            SetInteract(false); 
+            print("Can Interract is: " + canInteract);
             Action();
             StartCoroutine(ResetDelay()); 
             print(gameObject.name + " has been interacted with.");
@@ -30,5 +30,9 @@ public class InteractableBase : MonoBehaviour
         yield return new WaitForSeconds(1);
         canInteract = true; 
 
+    }
+    public void SetInteract(bool choice)
+    {
+        canInteract = choice;
     }
 }

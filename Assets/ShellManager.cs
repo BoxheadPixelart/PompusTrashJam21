@@ -74,9 +74,9 @@ public class ShellManager : MonoBehaviour
         // Get all the associated data for the shell
         currentShell = __shell;
         shellMountingPoint = __shell.transform;
-        shellClass = __shell.GetComponent<WearableShell>();
+        shellClass = __shell.transform.GetChild(0).GetComponent<WearableShell>();
         shellData = shellClass.GetShellData();
-        shellCollider = __shell.GetComponentInChildren<Collider>();
+        shellCollider = __shell.transform.GetChild(0).GetComponent<Collider>();
 
         // register the collider with the character controller so we don't go ZOOMING away
         characterController.RegisterCollider(shellCollider);

@@ -38,7 +38,7 @@ public class SunDamage : MonoBehaviour
         sunDPSDelta = SunDPS / 60f;
         sunWithShellDPSDelta = SunWithShellDPS / 60f;
 
-        shellManager = PlayerObject.GetComponentInChildren<ShellManager>();
+        shellManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<ShellManager>(); 
 
 
 
