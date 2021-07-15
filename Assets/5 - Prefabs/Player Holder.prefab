@@ -1,5 +1,134 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &112672200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 112672201}
+  - component: {fileID: 112672205}
+  - component: {fileID: 112672204}
+  - component: {fileID: 112672203}
+  - component: {fileID: 112672202}
+  - component: {fileID: 112672206}
+  m_Layer: 6
+  m_Name: InteractionZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &112672201
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112672200}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.00000011920929, y: 1.75, z: 2}
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_Children: []
+  m_Father: {fileID: 9141543281300816010}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &112672205
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112672200}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &112672204
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112672200}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 48aa50fab65ede54e82a5cfcd5207967, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &112672203
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112672200}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &112672202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112672200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 506726ed95e1b13498cf2887cac2ffd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nearbyInteracts: []
+  playerRoot: {fileID: 9136728837249041708}
+  InteractKey: 101
+--- !u!54 &112672206
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112672200}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1 &9140487394951658888
 GameObject:
   m_ObjectHideFlags: 0
@@ -96,6 +225,7 @@ GameObject:
   - component: {fileID: 9170801394178987596}
   - component: {fileID: 3127475411222714498}
   - component: {fileID: 9141543281219580015}
+  - component: {fileID: 87956805}
   m_Layer: 0
   m_Name: CrabCharacter
   m_TagString: Untagged
@@ -111,7 +241,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9140531969484228926}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.70710677}
-  m_LocalPosition: {x: -6.0214787, y: -3.0996666, z: -6.4665537}
+  m_LocalPosition: {x: -0.22, y: 0, z: -3.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 9141543281300816010}
@@ -203,10 +333,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Motor: {fileID: 9170801394178987596}
-  MaxStableMoveSpeed: 50
-  StableMovementSharpness: 50
-  OrientationSharpness: 50
-  OrientationMethod: 1
+  MaxStableMoveSpeed: 15
+  StableMovementSharpness: 20
+  OrientationSharpness: 12
+  OrientationMethod: 0
   MaxAirMoveSpeed: 15
   AirAccelerationSpeed: 15
   Drag: 0.1
@@ -222,6 +352,56 @@ MonoBehaviour:
   MeshRoot: {fileID: 9138682981318436932}
   CameraFollowPoint: {fileID: 9137112027648275216}
   CrouchedCapsuleHeight: 1
+--- !u!114 &87956805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9140531969484228926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d82fb341f42c614fbd4e308ae638acb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ParentObjectToPhysicallyScale: {fileID: 9141893631196320584}
+  PlayerCameraObject: {fileID: 9141088686837050568}
+  startingSize:
+    characterScale: 1
+    rigidbodyMass: 1
+    capsuleRadius: 0.5
+    crouchedHeight: 1
+    capsuleHeight: 2
+    capsuleYOffset: 1
+    cameraFOV: 75
+    cameraDefaultDistance: 6
+    cameraMinDistance: 0
+    cameraMaxDistance: 10
+    characterStableMovementSpeed: 15
+    characterStableMovementSharpness: 20
+    characterMaxStableSlopeAngle: 60
+    characterMaxStepHeight: 1
+    characterOrentationSharpness: 8
+    characterAirMoveSpeed: 15
+    characterAirAccelerationSpeed: 15
+  endingSize:
+    characterScale: 2
+    rigidbodyMass: 2
+    capsuleRadius: 1
+    crouchedHeight: 2
+    capsuleHeight: 4
+    capsuleYOffset: 2
+    cameraFOV: 75
+    cameraDefaultDistance: 8
+    cameraMinDistance: 0
+    cameraMaxDistance: 15
+    characterStableMovementSpeed: 25
+    characterStableMovementSharpness: 20
+    characterMaxStableSlopeAngle: 60
+    characterMaxStepHeight: 2
+    characterOrentationSharpness: 8
+    characterAirMoveSpeed: 15
+    characterAirAccelerationSpeed: 15
 --- !u!1 &9141030066422829936
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +513,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9141088686837050568}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -6.0214787, y: -3.0996666, z: -6.4665537}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9141543281081769551}
@@ -570,6 +750,7 @@ Transform:
   m_Children:
   - {fileID: 9138682981318436932}
   - {fileID: 9137112027648275216}
+  - {fileID: 112672201}
   m_Father: {fileID: 9136728837249041708}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

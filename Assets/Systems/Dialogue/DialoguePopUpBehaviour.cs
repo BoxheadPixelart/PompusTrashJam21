@@ -70,7 +70,7 @@ public class DialoguePopUpBehaviour : MonoBehaviour
                     wordCount = 0;
                     speechTime = 0;
                     isTalking = false;
-                    CloseDialogue(); 
+                    CloseDialogue();
                 }
                
             }
