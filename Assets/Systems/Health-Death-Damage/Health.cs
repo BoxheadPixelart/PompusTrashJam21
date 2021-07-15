@@ -6,7 +6,7 @@ public class Health : MonoBehaviour
 {
     public float health;
     public float maxHealth;
-    public GameObject MyObject;
+    public GameObject CharacterRootObject;
 
 
     // To add a listener for death: AddDeathListener(OnDeathDelegate method) -> OnDeath passes the PlayerObject (main object that houses everything)
@@ -87,7 +87,7 @@ public class Health : MonoBehaviour
 
         if (health <= 0)
         {
-            if(OnDeath != null) OnDeath(MyObject);
+            if(OnDeath != null) OnDeath(CharacterRootObject);
         }
 
     }
