@@ -2,35 +2,127 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*          Hi there!
+ *          
+ *          - Respawn has a bunch of checks to make sure respawn points still exist when you die.  If they don't exist - how do we handle htat?
+ *          
+ *          
+ *          - AddRespawnListener(Method)
+ *                  OnRespawn passes GameObject PlayerRootObject (Player Hold V2)
+ *          - RemoveRespawnListener(Method)
+ *          
+ *          - Use SetRespawnPoint(Transform) to set a new transform point
+ * 
+ * 
+ * 
+ */
+
+
 public class Respawn : DeathManager
 {
     public GameObject PlayerRootObject;
+    public Transform DefaultRespawnPoint;
+    public CrabSizeManager crabSizeManager;
+
+    //[Tooltip("If the player hits the same Respawn save point two times, save the bigger size.")]
+    public bool SaveSizeNoMatterWhat = true;
+
+    private Transform RespawnPoint;
+    private float respawnSize;
 
     public Health healthScript;
 
-    public Transform DefaultRespawnPoint;
+    
+    public GameObject DefaultEmptyObject;
+
     private Transform empty;
+    private Transform origRespawnPoint;
+
+
+
+
+
+
+    #region OnRespawnDelegate event methods
+
+    // --- the Delegate, for alerting other classes that we've respawned
+    public delegate void OnRespawnDelegate(GameObject PlayerRootObject);
+    public event OnRespawnDelegate OnRespawn;
+
+    public void AddRespawnListener(OnRespawnDelegate __del)
+    {
+        OnRespawn += __del;
+
+    }
+
+    public void RemoveDeathListener(OnRespawnDelegate __del)
+    {
+        OnRespawn -= __del;
+    }
+
+
+    #endregion
+
+
+
+
+
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         healthScript.AddDeathListener(_OnDeath);
+        
         if(DefaultRespawnPoint == null)
         {
-
-          // GameObject respwn = Instantiate(Object, EmptyObject);
-
+            GameObject go = Instantiate(DefaultEmptyObject, PlayerRootObject.transform.position, PlayerRootObject.transform.rotation);
+            DefaultRespawnPoint = go.transform;
         }
+
+        origRespawnPoint = DefaultRespawnPoint;
+        RespawnPoint = DefaultRespawnPoint;
+
+        respawnSize = crabSizeManager.GetCrabSize();
+    }
+
+
+    public void SetRespawnPoint(Transform respn) // Sets the player's respawn point to a new transform
+    {
+        RespawnPoint = respn;
+
+        bool saveSize = SaveSizeNoMatterWhat || (!SaveSizeNoMatterWhat && respn != RespawnPoint);
+
+        if(saveSize)
+        {
+            respawnSize = crabSizeManager.GetCrabSize();
+        }
+
 
     }
 
     
     private void _OnDeath(GameObject plyr)
     {
-        
+        Transform respn;
 
+        if (RespawnPoint != null) respn = RespawnPoint;
+        else respn = origRespawnPoint;
 
+        PlayerRootObject.transform.position = respn.transform.position;
+        PlayerRootObject.transform.rotation = respn.transform.rotation;
+
+        if(OnRespawn != null)
+        {
+            OnRespawn(PlayerRootObject);
+        }
+
+        Debug.Log("Respawned (" + System.DateTime.Now + ")");
+
+        healthScript.ResetHealth();
+        crabSizeManager.SetSize(respawnSize);
     }
 
 

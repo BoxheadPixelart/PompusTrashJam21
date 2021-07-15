@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*      CRAB Size Manager 
- *      CrabSizeManager has three public functions.
- *      
+ *
+ *            
  *      
  *      float GetCrabSize()
  *      Returns float from 0f to 100f representing size of crab from starting size to final size.
@@ -17,6 +17,10 @@ using UnityEngine;
  *      Adds xpAmt of XP towards the next size, or the default amount calculated based on growth over "crabSizeTimeToFullGrown" seconds.
  *      
  *      Will accept negative sizeAmt.
+ *
+ *
+ *      SetSize(float)
+ *      Sets crab size to float, between 0 and crabSizeMaximum
  *
  *
  *      AddSizeChangeListener(Method)
@@ -127,9 +131,19 @@ public void AddSize(float __sizeAmt)
 
     private void _addSize(float __sizeAmt)
     {
-        _crabSize = Mathf.Clamp(_crabSize +__sizeAmt,0f,crabSizeMaximum);
+        SetSize(__sizeAmt + _crabSize);
+
+        
+    }
+
+
+    public void SetSize(float __sizeAmt)
+    {
+
+        _crabSize = Mathf.Clamp(__sizeAmt, 0f, crabSizeMaximum);
 
         _checkForSizeChange();
+
     }
 
 
