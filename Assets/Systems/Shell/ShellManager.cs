@@ -13,6 +13,7 @@ public class ShellManager : MonoBehaviour
 
     public GameObject PlayerHolder;
     public Transform playerMountingPoint;
+    public GameObject ParentForShell;
 
 
     private KinematicCharacterController.Crab.CrabCharacterController characterController;
@@ -54,6 +55,18 @@ public class ShellManager : MonoBehaviour
         Debug.Log("Current shell status is " + ShellStatus().ToString());
         characterController = PlayerHolder.GetComponentInChildren<KinematicCharacterController.Crab.CrabCharacterController>();
 
+        if (ParentForShell == null) ParentForShell = playerMountingPoint.parent.gameObject;
+
+    }
+
+
+    private void Update()
+    {
+        if(ShellStatus())
+        {
+            shellMountingPoint.position = playerMountingPoint.position;
+            shellMountingPoint.rotation = playerMountingPoint.rotation;
+        }
     }
 
 
@@ -116,7 +129,7 @@ public class ShellManager : MonoBehaviour
     private void MountShell(Transform __shellMP)
     {
 
-        __shellMP.SetParent(playerMountingPoint, true);
+        __shellMP.SetParent(ParentForShell.transform, true);
         __shellMP.transform.localPosition = new Vector3(0f, 0f, 0f);
         __shellMP.transform.localRotation = new Quaternion(0f, 0f, 0f,0f);
 
