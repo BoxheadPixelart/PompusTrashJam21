@@ -13,6 +13,7 @@ public class ShellManager : MonoBehaviour
 
     public GameObject PlayerHolder;
     public Transform playerMountingPoint;
+    [Tooltip("The Object the Shell will be parented to - to pull it into the level")]
     public GameObject ParentForShell;
 
 

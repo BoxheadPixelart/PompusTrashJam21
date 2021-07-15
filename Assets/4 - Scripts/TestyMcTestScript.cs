@@ -5,16 +5,21 @@ using UnityEngine;
 
 public class TestyMcTestScript : MonoBehaviour
 {
+    // GameObject.FindGameObjectWithTag("GameController").GetComponent<ShellManager>();
     private string _myName = "TestMcTestObject: ";
 
-    public GameObject PlayerRootObject;
-    public GameObject GameManager;
-    public CrabSizeManager crabSizeManager;
-    public Health healthScript;
+    private GameObject PlayerRootObject;
+    private GameObject GameManager;
+    private CrabSizeManager crabSizeManager;
+    private Health healthScript;
 
     private void Start()
     {
-        
+        PlayerRootObject = GameObject.FindGameObjectWithTag("Player");
+        GameManager = GameObject.FindGameObjectWithTag("GameController");
+        crabSizeManager = GameManager.GetComponentInChildren<CrabSizeManager>();
+        healthScript = GameManager.GetComponentInChildren<Health>();
+    
     }
 
     private void Update()

@@ -23,6 +23,8 @@ public class SunDamage : MonoBehaviour
     private int sunlightCheckCounter = -1;
     public bool inSunlight;
 
+    private GameObject gameController;
+
     public List<Transform> sunLightCheckPoints;
 
     public LayerMask IgnoreTheseLayers;
@@ -34,12 +36,14 @@ public class SunDamage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameController = GameObject.FindGameObjectWithTag("GameController");
+
         sunDPSDelta = SunDPS / 60f;
         sunWithShellDPSDelta = SunWithShellDPS / 60f;
 
-        shellManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<ShellManager>(); 
+        shellManager = gameController.GetComponent<ShellManager>();
 
-
+        HealthScript = gameController.GetComponent<Health>();
 
         // --- Creating the inverted bitmask for the raycast
         LayerMask acceptedLayersBitMask = 0;
@@ -60,15 +64,11 @@ public class SunDamage : MonoBehaviour
 
         Debug.Log("Ignored Bitmask inverted: " + LayerMask.LayerToName(acceptedLayersBitMask) + " (" + (int)acceptedLayersBitMask + ")");
 
-
         foreach(Transform sclp in sunLightCheckPoints)
         {
             sclp.GetComponent<Renderer>().enabled = false;
             sclp.GetComponent<MeshRenderer>().enabled = false;
-
         }
-
-
 
     }
 

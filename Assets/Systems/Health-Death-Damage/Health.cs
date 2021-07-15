@@ -19,7 +19,13 @@ public class Health : MonoBehaviour
     public GameObject CharacterRootObject;
 
 
-   
+
+    private void Start()
+    {
+        if(CharacterRootObject == null) CharacterRootObject = GameObject.FindGameObjectWithTag("Player");
+    }
+
+
 
     #region OnHealthChangeDelegate event methods
 
