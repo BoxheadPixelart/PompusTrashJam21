@@ -112,7 +112,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nearbyInteracts: []
   playerRoot: {fileID: 2335761260168882773}
+  grabPoint: {fileID: 0}
   InteractKey: 101
+  canInteract: 0
 --- !u!54 &583211455
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -356,7 +358,7 @@ GameObject:
   - component: {fileID: 1611510236590191738}
   m_Layer: 0
   m_Name: Player Holder_v2
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -405,7 +407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   maxHealth: 100
-  MyObject: {fileID: 2340514096984420660}
+  CharacterRootObject: {fileID: 0}
 --- !u!1 &2341047652331584521
 GameObject:
   m_ObjectHideFlags: 0

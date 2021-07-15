@@ -21,6 +21,7 @@ using UnityEngine;
 public class Respawn : DeathManager
 {
     public GameObject PlayerRootObject;
+    private KinematicCharacterController.KinematicCharacterMotor PlayerMotorObject;
     public Transform DefaultRespawnPoint;
     public CrabSizeManager crabSizeManager;
 
@@ -38,7 +39,7 @@ public class Respawn : DeathManager
     private Transform empty;
     private Transform origRespawnPoint;
 
-
+    GameObject go;
 
 
 
@@ -66,19 +67,22 @@ public class Respawn : DeathManager
 
 
 
-
-
-
-
-
     // Start is called before the first frame update
     void Start()
     {
+        if(PlayerRootObject == null)
+        {
+            PlayerRootObject = GameObject.FindGameObjectWithTag("Player");
+        }
+
+        PlayerMotorObject = PlayerRootObject.GetComponentInChildren<KinematicCharacterController.KinematicCharacterMotor>();
+
+
         healthScript.AddDeathListener(_OnDeath);
         
         if(DefaultRespawnPoint == null)
         {
-            GameObject go = Instantiate(DefaultEmptyObject, PlayerRootObject.transform.position, PlayerRootObject.transform.rotation);
+            GameObject go = Instantiate(DefaultEmptyObject, PlayerMotorObject.transform.position, PlayerMotorObject.transform.rotation);
             DefaultRespawnPoint = go.transform;
         }
 
@@ -111,8 +115,11 @@ public class Respawn : DeathManager
         if (RespawnPoint != null) respn = RespawnPoint;
         else respn = origRespawnPoint;
 
-        PlayerRootObject.transform.position = respn.transform.position;
-        PlayerRootObject.transform.rotation = respn.transform.rotation;
+
+        //PlayerMotorObject.transform.position = respn.transform.position;
+        //PlayerMotorObject.transform.rotation = respn.transform.rotation;
+
+        PlayerMotorObject.SetPositionAndRotation(respn.position, respn.rotation, true);
 
         if(OnRespawn != null)
         {
