@@ -8,7 +8,6 @@ public class SunDamage : MonoBehaviour
     public GameObject CenterOfMesh;
     private ShellManager shellManager;
 
-    public GameObject SunReference;
     public GameObject DirectionalLightSunReference;
 
     public float DistanceToRaycast;
