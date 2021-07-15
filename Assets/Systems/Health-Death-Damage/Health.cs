@@ -92,12 +92,7 @@ public class Health : MonoBehaviour
 
     }
 
-    void _OnDeath(GameObject playerObject)
-    {
-        Debug.Log("They died. Run the respawn.");
-
-    }
-
+    
 
 
 
