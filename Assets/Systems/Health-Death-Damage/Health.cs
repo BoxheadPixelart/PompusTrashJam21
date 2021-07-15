@@ -2,6 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ *   // Listener for Death: AddDeathListener(OnDeathDelegate method) -> OnDeath passes the PlayerObject (main object that houses everything)
+    // Listener for Health Changes: AddHealthChangeListener(OnHealthChangeDelegate method) -> OnHealthChangeDelegate passes health (float)
+ *     AddHealth(float) Adds health
+ *     SubtractHealth(float) Subtracts health
+ *     ResetHealth() Resets health to max
+ */
+
+
+
 public class Health : MonoBehaviour
 {
     public float health;
@@ -9,10 +19,7 @@ public class Health : MonoBehaviour
     public GameObject CharacterRootObject;
 
 
-    // To add a listener for death: AddDeathListener(OnDeathDelegate method) -> OnDeath passes the PlayerObject (main object that houses everything)
-
-    // To add a listener for health changes: AddHealthChangeListener(OnHealthChangeDelegate method) -> OnHealthChangeDelegate passes health (float)
-
+   
 
     #region OnHealthChangeDelegate event methods
 
@@ -56,6 +63,14 @@ public class Health : MonoBehaviour
 
     #endregion
 
+
+
+
+    public void ResetHealth()
+    {
+        AddHealth(10000);
+
+    }
 
 
 
