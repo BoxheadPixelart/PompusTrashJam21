@@ -16,15 +16,15 @@ public class ItemBase : InteractableBase
         get {
             if (rb is null)
             {
-                rb = GetComponent<Rigidbody>(); 
+                rb = GetComponent<Rigidbody>();
             }
-            return rb; 
+            return rb;
         }
         set
         {
-            rb = value; 
+            rb = value;
         }
-       
+
     }
     private Transform holder;
     private Vector3 itemDir;
@@ -40,7 +40,7 @@ public class ItemBase : InteractableBase
         SetInteract(true);
         rb.GetComponent<Rigidbody>(); 
     }
-    private void FixedUpdate()
+    private void Update()
     {
    
         if (isPickedUp)
@@ -55,16 +55,23 @@ public class ItemBase : InteractableBase
     // Update is called once per frame
     public override void Action(InteractionManager manager)
     {
-        pickupTarget = manager.grabPoint;
-        Pickup(manager.grabPoint,manager.playerRoot); 
-        print("Item has been picked up");
+        if (isPickedUp != true)
+        {
+            pickupTarget = manager.grabPoint;
+            Pickup(manager.grabPoint, manager.playerRoot);
+            print("Item has been picked up");
+        } else
+        {
+            Drop(); 
+        }
+      
     }
     //
     public void MoveToGrabPoint()
     {
         print(Rb); 
         Vector3 heading = (pickupTarget.position - Rb.position);
-        rb.velocity += (heading * (25) - Rb.velocity) * 0.75f;
+        rb.velocity = (heading * 25);
         gItemDir = holder.rotation.eulerAngles;
         SpringRotateToHand();
     }
@@ -77,7 +84,7 @@ public class ItemBase : InteractableBase
     }
     public void Pickup(Transform pT, Transform hold)
     {
-        gameObject.layer = LayerMask.NameToLayer("ItemHeld");
+       // gameObject.layer = LayerMask.NameToLayer("ItemHeld");
         pickupTarget = pT;
         isPickedUp = true;
         //stats = hold.stats;
@@ -86,7 +93,7 @@ public class ItemBase : InteractableBase
 
     public void Drop()
     {
-        gameObject.layer = LayerMask.NameToLayer("Item");
+      //  gameObject.layer = LayerMask.NameToLayer("Item");
         isPickedUp = false;
         pickupTarget = null;
         holder = null;

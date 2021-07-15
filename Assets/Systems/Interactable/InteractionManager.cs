@@ -8,7 +8,8 @@ public class InteractionManager : MonoBehaviour
     public Transform playerRoot;
     public Transform grabPoint; 
     public KeyCode InteractKey;
-    public bool canInteract; 
+    public bool canInteract;
+    InteractableBase interact; 
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +24,7 @@ public class InteractionManager : MonoBehaviour
             if (canInteract) // this is ugly and you should feel bad, break this into methods later 
             {
                 print("E pressed");
-                InteractableBase interact = GetClosestEnemy(nearbyInteracts, playerRoot).gameObject.GetComponent<InteractableBase>();
+                interact = GetClosestEnemy(nearbyInteracts, playerRoot).gameObject.GetComponent<InteractableBase>();
                 print(interact);
                 if (interact.GetType() == typeof(WearableShell))
                 {
@@ -37,6 +38,19 @@ public class InteractionManager : MonoBehaviour
                     print("YOU HAVE FOUND An ITEM");
                 }
                 // do one more for NPCS LATER
+            } else
+            {
+                if (interact is null)
+                {
+                    print("OOF"); 
+                } else
+                {   
+                    if (interact.GetType() == typeof(ItemBase))
+                    {
+                        interact.InteractAction(this);
+                        print("YOU HAVE FOUND An ITEM");
+                    }
+                }
             }
        }
         
