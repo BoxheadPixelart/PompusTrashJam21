@@ -28,7 +28,7 @@ public class InteractableBase : MonoBehaviour
     }
     IEnumerator ResetDelay()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(.1f);
         canInteract = true; 
 
     }

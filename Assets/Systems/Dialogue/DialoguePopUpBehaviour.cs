@@ -61,24 +61,27 @@ public class DialoguePopUpBehaviour : MonoBehaviour
             {
                 if (wordCount < dialogueData.sentence.Length - 1)
                 {
-                    wordCount += 1;
-                    // BAP
-                    SetWord(dialogueData.sentence[wordCount]);
-                    speechTime = 0;
-                } else
-                {
+                    wordCount += 1; 
+                    // BAP 
+                    SetWord(dialogueData.sentence[wordCount]); 
+                    speechTime = 0; 
+                } 
+                else 
+                { 
                     wordCount = 0;
                     speechTime = 0;
                     isTalking = false;
                     CloseDialogue();
                 }
-               
             }
-            
         } 
-
     }
-    
+
+    public void SetData(DialogueData data)
+    {
+        dialogueData = data;
+        OpenDialogue(); 
+    }
     private void FixedUpdate()
     {
         Vector3[] ScaleSpring = Numeric_Springing.Spring_Vector3(scale,scaleVelo,gScale,.8f,1.2f,3);

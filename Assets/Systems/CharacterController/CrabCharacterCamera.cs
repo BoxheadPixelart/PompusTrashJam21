@@ -14,7 +14,7 @@ namespace KinematicCharacterController.Crab
 
         [Header("Distance")]
         public float DefaultDistance = 6f;
-        public float MinDistance = 0f;
+        public float MinDistance = 3f;
         public float MaxDistance = 10f;
         public float DistanceMovementSpeed = 5f;
         public float DistanceMovementSharpness = 10f;

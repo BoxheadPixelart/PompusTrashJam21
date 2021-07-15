@@ -21,9 +21,12 @@ public class InteractionManager : MonoBehaviour
     {
        if (Input.GetKeyDown(InteractKey))
        {
+            print("E pressed");
+            print(canInteract);
+        
             if (canInteract) // this is ugly and you should feel bad, break this into methods later 
             {
-                print("E pressed");
+
                 interact = GetClosestEnemy(nearbyInteracts, playerRoot).gameObject.GetComponent<InteractableBase>();
                 print(interact);
                 if (interact.GetType() == typeof(WearableShell))
@@ -35,11 +38,14 @@ public class InteractionManager : MonoBehaviour
                 if (interact.GetType() == typeof(ItemBase))
                 {
                     interact.InteractAction(this);
+                    canInteract = false; 
                     print("YOU HAVE FOUND An ITEM");
                 }
                 // do one more for NPCS LATER
-            } else
+            } 
+            else
             {
+                print(interact);
                 if (interact is null)
                 {
                     print("OOF"); 
@@ -47,13 +53,17 @@ public class InteractionManager : MonoBehaviour
                 {   
                     if (interact.GetType() == typeof(ItemBase))
                     {
-                        interact.InteractAction(this);
-                        print("YOU HAVE FOUND An ITEM");
+                        DropItem(); 
                     }
                 }
             }
        }
-        
+    }
+    public void DropItem()
+    {
+        interact.InteractAction(this);
+        canInteract = true; 
+        print("Dropped");
     }
     //
     Transform GetClosestEnemy(List<Transform> enemies, Transform fromThis)

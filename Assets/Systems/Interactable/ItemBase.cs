@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ItemBase : InteractableBase
 {
-    public bool IsPickedUp;
+    //public bool IsPickedUp;
     //
     private MeshFilter meshFilter;
     private Rigidbody rb;
@@ -26,15 +26,13 @@ public class ItemBase : InteractableBase
         }
 
     }
-    private Transform holder;
+    public Transform holder;
     private Vector3 itemDir;
     private Vector3 gItemDir;
     private Vector3 itemDirVelo;
-    public Vector3 debugRot;
-    //
-    bool isPickedUp;
+    public bool isPickedUp;
     public Transform pickupTarget;
-
+    public ItemData itemData; 
     void Start()
     {
         SetInteract(true);
@@ -84,7 +82,7 @@ public class ItemBase : InteractableBase
     }
     public void Pickup(Transform pT, Transform hold)
     {
-       // gameObject.layer = LayerMask.NameToLayer("ItemHeld");
+        gameObject.layer = LayerMask.NameToLayer("ItemHeld");
         pickupTarget = pT;
         isPickedUp = true;
         //stats = hold.stats;
@@ -93,7 +91,7 @@ public class ItemBase : InteractableBase
 
     public void Drop()
     {
-      //  gameObject.layer = LayerMask.NameToLayer("Item");
+        gameObject.layer = LayerMask.NameToLayer("Interactable");
         isPickedUp = false;
         pickupTarget = null;
         holder = null;

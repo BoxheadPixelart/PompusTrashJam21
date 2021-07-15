@@ -112,7 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nearbyInteracts: []
   playerRoot: {fileID: 2335761260168882773}
-  grabPoint: {fileID: 0}
+  grabPoint: {fileID: 1161520553}
   InteractKey: 101
   canInteract: 0
 --- !u!54 &583211455
@@ -131,6 +131,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!1 &1161520552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1161520553}
+  m_Layer: 0
+  m_Name: GrabPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 3443629218296621865, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1161520553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161520552}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2338911667549931325}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &85704307569464486
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,6 +340,7 @@ Transform:
   - {fileID: 2335757307691967417}
   - {fileID: 3624450529637622725}
   - {fileID: 583211450}
+  - {fileID: 1161520553}
   m_Father: {fileID: 2340514096706449395}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

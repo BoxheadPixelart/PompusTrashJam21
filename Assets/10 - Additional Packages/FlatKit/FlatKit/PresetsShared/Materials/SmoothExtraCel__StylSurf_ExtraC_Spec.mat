@@ -68,6 +68,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AlphaClip: 0
     - _Blend: 0
@@ -144,7 +145,7 @@ Material:
     - _ColorCelShadow: {r: 0.49056602, g: 0.34478462, b: 0.4476891, a: 1}
     - _ColorDim: {r: 0.5660378, g: 0.53950477, b: 0.42452833, a: 0.85}
     - _ColorDimCurve: {r: 0.85, g: 0.85, b: 0.85, a: 0.85}
-    - _ColorDimExtra: {r: 0.27158558, g: 0, b: 0.5943396, a: 0.85}
+    - _ColorDimExtra: {r: 0.27836406, g: 0, b: 0.6132076, a: 0.85}
     - _ColorDimSteps: {r: 0.4811321, g: 0.1764863, b: 0.111205064, a: 0.85}
     - _ColorGradient: {r: 0.20568848, g: 0.19090424, b: 0.6226415, a: 1}
     - _ColorSecondary: {r: 1, g: 0.55879205, b: 0, a: 1}
@@ -155,3 +156,4 @@ Material:
     - _FlatSpecularColor: {r: 0.4811321, g: 0.102597006, b: 0.0068084607, a: 1}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
     - _UnityShadowColor: {r: 0.65, g: 0.65, b: 0.65, a: 1}
+  m_BuildTextureStacks: []
