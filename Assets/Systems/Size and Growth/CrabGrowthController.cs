@@ -66,8 +66,8 @@ public class CrabGrowthController : MonoBehaviour
     private float _shellSizeMinimum = 0f;
     private float _shellSizeMaximum = 100f;
 
-    private float _shellSpeedDebuffAtMinimum = 0.25f; // below minimum size, debuff multiplier is 0
-    private float _shellSpeedDebuffAtMaximum = 0.10f;
+    private float _shellSpeedDebuffAtMinimum = 0.6f; // below minimum size, debuff multiplier is 0
+    private float _shellSpeedDebuffAtMaximum = 0.7f;
 
 
 

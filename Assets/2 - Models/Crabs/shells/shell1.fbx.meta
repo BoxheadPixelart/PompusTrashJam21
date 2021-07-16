@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: d92738b77dbe44d468540ff8f87cca8a
+guid: a170339a9e451e0418d99b9cf690fed4
 ModelImporter:
   serializedVersion: 21100
   internalIDToNameTable: []
@@ -22,7 +22,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    importConstraints: 1
+    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
