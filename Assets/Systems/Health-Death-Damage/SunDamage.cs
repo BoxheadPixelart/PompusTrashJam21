@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SunDamage : MonoBehaviour
 {
+
     public GameObject PlayerObject;
     public GameObject CenterOfMesh;
     private ShellManager shellManager;
@@ -75,6 +76,8 @@ public class SunDamage : MonoBehaviour
     
     void FixedUpdate()
     {
+
+   
 
         if(inSunlight) // if we're in sunlight, check if we still are right away
         {

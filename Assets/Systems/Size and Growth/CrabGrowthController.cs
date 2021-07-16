@@ -117,8 +117,6 @@ public class CrabGrowthController : MonoBehaviour
 
         if(__size > _shellData.maxSize)
         {
-            _ShellManager.UnequipShell();
-
             return 1;
         }
 
@@ -255,6 +253,8 @@ public class CrabGrowthController : MonoBehaviour
 
 
     }
+
+
 
 
 }

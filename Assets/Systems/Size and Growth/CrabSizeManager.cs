@@ -4,7 +4,9 @@ using UnityEngine;
 
 /*      CRAB Size Manager 
  *
- *            
+ *      
+ *      PauseGrowthChange() / UnpauseGrowthChange() - obviously
+ *      
  *      
  *      float GetCrabSize()
  *      Returns float from 0f to 100f representing size of crab from starting size to final size.
@@ -72,6 +74,8 @@ public class CrabSizeManager : MonoBehaviour
     private float _crabSize = 0;
     private float _crabSizeLastReported = 0;
 
+    public bool DEBUGDisableGrowth;
+
 
     #region OnSizeChangeDelegate event methods
 
@@ -108,7 +112,22 @@ public class CrabSizeManager : MonoBehaviour
 
 
 
-public void AddSize() // Add default XP amount to the current XP 
+    public void PauseGrowthChange()
+    {
+        DEBUGDisableGrowth = true;
+
+    }
+
+    public void UnpauseGrowthChange()
+    {
+        DEBUGDisableGrowth = false;
+
+    }
+
+
+
+
+    public void AddSize() // Add default XP amount to the current XP 
     {
         _addSize(crabSizeDefaultIncrease);
     }
@@ -116,7 +135,7 @@ public void AddSize() // Add default XP amount to the current XP
 
 public void AddSize(float __sizeAmt)
     {
-        _addSize(__sizeAmt);
+        if(!DEBUGDisableGrowth) _addSize(__sizeAmt);
     }
 
 

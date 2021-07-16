@@ -11,6 +11,8 @@ public class ShellManager : MonoBehaviour
         
     */
 
+    public KeyCode QuitShellKey;
+    
     public GameObject PlayerHolder;
     public Transform playerMountingPoint;
     [Tooltip("The Object the Shell will be parented to - to pull it into the level")]
@@ -19,6 +21,9 @@ public class ShellManager : MonoBehaviour
 
     private KinematicCharacterController.Crab.CrabCharacterController characterController;
 
+    private CrabSizeManager _sizeManager;
+    private float _crabSize;
+
     private GameObject currentShell;
     private Transform shellMountingPoint;
     private Collider shellCollider;
@@ -26,6 +31,8 @@ public class ShellManager : MonoBehaviour
     private WearableShell.ShellData shellData;
     private WearableShell.ShellData nullShellData;
     private Rigidbody shellRigidbody;
+
+    private bool amIThePlayer = false;
 
 
     #region OnShellChangeDelegate event methods
@@ -53,21 +60,51 @@ public class ShellManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _sizeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<CrabSizeManager>();
+        _sizeManager.AddSizeChangeListener(_SizeUpdate);
+
+
         Debug.Log("Current shell status is " + ShellStatus().ToString());
         characterController = PlayerHolder.GetComponentInChildren<KinematicCharacterController.Crab.CrabCharacterController>();
 
         if (ParentForShell == null) ParentForShell = playerMountingPoint.parent.gameObject;
+
+        if(PlayerHolder.CompareTag("Player"))
+        {
+            amIThePlayer = true;
+
+            if (QuitShellKey == KeyCode.None) QuitShellKey = KeyCode.Q;
+        }
+
+
+
+        
 
     }
 
 
     private void Update()
     {
-        if(ShellStatus())
+        bool haveShell = ShellStatus();
+
+        if(haveShell)
         {
             shellMountingPoint.position = playerMountingPoint.position;
             shellMountingPoint.rotation = playerMountingPoint.rotation;
+
+            if (amIThePlayer)
+            {
+                if(Input.GetKeyDown(QuitShellKey))
+                {
+                    UnequipShell();
+
+                }
+
+            }
+
         }
+
+
     }
 
 
@@ -76,10 +113,31 @@ public class ShellManager : MonoBehaviour
         return (currentShell != null);
     }
 
+    // Add a SizeUpdate here and toss off the shell if it's too small
+    //UnequipShell();
 
-   
+    private void _SizeUpdate(float __size)
+    {
+        _crabSize = __size;
+
+        if(ShellStatus())
+        {
+            if (__size > shellData.maxSize) UnequipShell();
+
+        }
+
+    }
+
+
+
     public void EquipShell(GameObject __shell)
     {
+        WearableShell tempShellClass = __shell.transform.GetChild(0).GetComponent<WearableShell>();
+        WearableShell.ShellData tempShellData = tempShellClass.GetShellData();
+
+        if (tempShellData.maxSize < _crabSize) return;
+
+
         if(ShellStatus())
         {
             UnequipShell();
@@ -88,8 +146,8 @@ public class ShellManager : MonoBehaviour
         // Get all the associated data for the shell
         currentShell = __shell;
         shellMountingPoint = __shell.transform;
-        shellClass = __shell.transform.GetChild(0).GetComponent<WearableShell>();
-        shellData = shellClass.GetShellData();
+        shellClass = tempShellClass;
+        shellData = tempShellData;
         shellCollider = __shell.transform.GetChild(0).GetComponent<Collider>();
 
         // register the collider with the character controller so we don't go ZOOMING away
