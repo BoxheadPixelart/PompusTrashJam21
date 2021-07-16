@@ -36,7 +36,7 @@ public class DialoguePopUpBehaviour : MonoBehaviour
 
     void Start()
     {
-        CloseDialogue(); 
+       // CloseDialogue(); 
     }
 
     // Update is called once per frame

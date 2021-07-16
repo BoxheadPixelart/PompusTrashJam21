@@ -8,7 +8,8 @@ public class npcController : MonoBehaviour
     public ItemData goalItem;
     public GameObject dialoguePrefab;
     public DialogueData WinSentence;
-    public DialogueData FailSentence; 
+    public DialogueData FailSentence;
+    public Transform dialoguePoint; 
     // Start is called before the first frame update
     void Start()
     {
@@ -39,7 +40,7 @@ public class npcController : MonoBehaviour
     }
     public void Speak(DialogueData data) 
     {
-        GameObject popup = Instantiate(dialoguePrefab, transform.position, Quaternion.identity); 
+        GameObject popup = Instantiate(dialoguePrefab, dialoguePoint.position, Quaternion.identity); 
         DialoguePopUpBehaviour dialogue =  popup.GetComponent<DialoguePopUpBehaviour>();
         dialogue.SetData(data); 
     }

@@ -36,7 +36,7 @@ public class ItemBase : InteractableBase
     void Start()
     {
         SetInteract(true);
-        rb.GetComponent<Rigidbody>(); 
+        Rb.GetComponent<Rigidbody>(); 
     }
     private void Update()
     {

@@ -83,6 +83,11 @@ public class InteractionManager : MonoBehaviour
         }
         return bestTarget;
     }
+    public void ClearHeld()
+    {
+        nearbyInteracts.Clear();
+        canInteract = true; 
+    }
     //
     private void OnTriggerEnter(Collider other)
     {
