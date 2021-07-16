@@ -8,6 +8,11 @@ using UnityEngine;
  *     AddHealth(float) Adds health
  *     SubtractHealth(float) Subtracts health
  *     ResetHealth() Resets health to max
+ *     
+ *     
+ *     PauseHealthChange() / UnpauseHealthChange()
+ *     
+ *     
  */
 
 
@@ -17,6 +22,8 @@ public class Health : MonoBehaviour
     public float health;
     public float maxHealth;
     public GameObject CharacterRootObject;
+
+    public bool DEBUGFreezeHealth;
 
 
 
@@ -72,6 +79,21 @@ public class Health : MonoBehaviour
 
 
 
+    public void PauseHealthChange()
+    {
+        DEBUGFreezeHealth = true;
+
+    }
+
+    public void UnpauseHealthChange()
+    {
+        DEBUGFreezeHealth = false;
+
+    }
+
+
+
+
     public void ResetHealth()
     {
         AddHealth(10000);
@@ -97,6 +119,8 @@ public class Health : MonoBehaviour
     private void _AddHealth(float __health)
 
     {
+        if (DEBUGFreezeHealth) return;
+
         float __oldhealth = health;
 
         health = Mathf.Clamp(health + __health, 0, maxHealth);

@@ -23,7 +23,7 @@ public class Respawn : DeathManager
     public GameObject PlayerRootObject;
     private KinematicCharacterController.KinematicCharacterMotor PlayerMotorObject;
     public Transform DefaultRespawnPoint;
-    public CrabSizeManager crabSizeManager;
+    private CrabSizeManager crabSizeManager;
 
     //[Tooltip("If the player hits the same Respawn save point two times, save the bigger size.")]
     public bool SaveSizeNoMatterWhat = true;
@@ -70,6 +70,8 @@ public class Respawn : DeathManager
     // Start is called before the first frame update
     void Start()
     {
+        crabSizeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<CrabSizeManager>();
+
         if(PlayerRootObject == null)
         {
             PlayerRootObject = GameObject.FindGameObjectWithTag("Player");
