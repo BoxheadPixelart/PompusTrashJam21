@@ -12,7 +12,7 @@ public class SizeVariables
     public float capsuleRadius = 0.5f;
     public float crouchedHeight = 1f;
     public float capsuleHeight = 2f;
-    
+
     public float capsuleYOffset = 1f;
     public float cameraFOV = 75;
     public float cameraDefaultDistance = 6;
@@ -26,7 +26,7 @@ public class SizeVariables
     public float characterJumpUpSpeed = 10;
     public float characterAirMoveSpeed = 15;
     public float characterAirAccelerationSpeed = 15;
-    
+
 
 
 }
@@ -38,11 +38,11 @@ public class CrabGrowthController : MonoBehaviour
 {
     public GameObject ParentObjectToPhysicallyScale;
     public GameObject PlayerCameraObject;
-            private KinematicCharacterController.Crab.CrabCharacterCamera _cameraScript;
-            private KinematicCharacterController.Crab.CrabCharacterController _charController;
-            private Camera _camera;
-            private CapsuleCollider _capsuleCollider;
-            private Rigidbody _rigidBody;
+    private KinematicCharacterController.Crab.CrabCharacterCamera _cameraScript;
+    private KinematicCharacterController.Crab.CrabCharacterController _charController;
+    private Camera _camera;
+    private CapsuleCollider _capsuleCollider;
+    private Rigidbody _rigidBody;
 
     public ShellManager _ShellManager;
     private WearableShell.ShellData _shellData;
@@ -65,9 +65,9 @@ public class CrabGrowthController : MonoBehaviour
 
     private float _shellSizeMinimum = 0f;
     private float _shellSizeMaximum = 100f;
-                  
-    private float _shellSpeedDebuffAtMinimum = 0.5f; // below minimum size, debuff multiplier is 0
-    private float _shellSpeedDebuffAtMaximum = 0.25f; 
+
+    private float _shellSpeedDebuffAtMinimum = 0.25f; // below minimum size, debuff multiplier is 0
+    private float _shellSpeedDebuffAtMaximum = 0.10f;
 
 
 
@@ -75,11 +75,11 @@ public class CrabGrowthController : MonoBehaviour
     // ---- Connect to the crabSizeManager
     private CrabSizeManager _CrabSizeManager;
 
-    
+
     // --- Connect to character motor
     private KinematicCharacterMotor _CharMotor;
 
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -111,27 +111,22 @@ public class CrabGrowthController : MonoBehaviour
 
     private float ShellDebuffMultiplier(float __size)
     {
-        if (!_wearingShell) return 1;
+        if (!_wearingShell) return 1f;
 
         if (__size < _shellData.minSize) return 0.05f;
 
-        if(__size > _shellData.maxSize)
+        if (__size > _shellData.maxSize)
         {
-            return 1;
+            return 1f;
         }
-
-
-        float __multi = 1;
-
-        float _lerpVal = (__size - _shellSizeMinimum) / (_shellSizeMaximum - _shellSizeMinimum);
-
-        __multi = Mathf.Lerp(_shellSpeedDebuffAtMinimum, _shellSpeedDebuffAtMaximum, _lerpVal);
-
-        return __multi;
-
+        //C L A M P 
+        //  float __multi = 1f;
+        float _lerpVal = (__size - _shellSizeMinimum) / (_shellSizeMaximum - _shellSizeMinimum); //Mathf.InverseLerp()
+        //float __multi = Mathf.Lerp(_shellSpeedDebuffAtMinimum, _shellSpeedDebuffAtMaximum, _lerpVal);
+        return Mathf.Lerp(_shellSpeedDebuffAtMinimum, _shellSpeedDebuffAtMaximum, _lerpVal);
     }
 
-    private void ShellUpdate(bool __wearingShell,WearableShell.ShellData shellData)
+    private void ShellUpdate(bool __wearingShell, WearableShell.ShellData shellData)
     {
         _wearingShell = __wearingShell;
 
@@ -144,27 +139,27 @@ public class CrabGrowthController : MonoBehaviour
 
     private void SizeUpdate(float __size)
     {
-        size = __size; 
+        size = __size;
 
         float _shellDebuffMultiplier = ShellDebuffMultiplier(__size);
-        
 
 
-        __size = Mathf.Clamp(__size * 0.01f,0f,1f); // __size can now be used as a 0-1 lerp
+
+        __size = Mathf.Clamp(__size * 0.01f, 0f, 1f); // __size can now be used as a 0-1 lerp
 
         // Mesh object scale change
         float __scaleSize = startingSize.characterScale + ((endingSize.characterScale - startingSize.characterScale) * __size);
         Vector3 __newScale = new Vector3(__scaleSize, __scaleSize, __scaleSize);
         ParentObjectToPhysicallyScale.transform.localScale = __newScale;
 
-        
+
 
         // Rigidbody mass change
         float __rigidbodyMass = Mathf.Lerp(startingSize.rigidbodyMass, endingSize.rigidbodyMass, __size);
 
         _rigidBody.mass = __rigidbodyMass;
 
-        
+
 
         #region  // Capsule resizing / Character Motor
         //SetCapsuleDimensions(float radius, float height, float yOffset)
@@ -185,7 +180,7 @@ public class CrabGrowthController : MonoBehaviour
         #endregion
 
 
-  
+
 
         #region // Camera settings
 
