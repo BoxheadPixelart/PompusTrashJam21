@@ -11,7 +11,8 @@ namespace KinematicCharacterController.Crab
     {
         public CrabCharacterController Character;
         public CrabCharacterCamera CharacterCamera;
-
+        public Animator animator;
+        public Transform cameraTarget; 
         private const string MouseXInput = "Mouse X";
         private const string MouseYInput = "Mouse Y";
         private const string MouseScrollInput = "Mouse ScrollWheel";
@@ -32,11 +33,11 @@ namespace KinematicCharacterController.Crab
 
         private void Update()
         {
-          //  if (Input.GetMouseButtonDown(0))
-           // {
+            //  if (Input.GetMouseButtonDown(0))
+            // {
             //    Cursor.lockState = CursorLockMode.Locked;
-           //```` }
-
+            //```` }
+            cameraTarget.position = Character.Motor.transform.position; 
             HandleCharacterInput();
         }
 
@@ -88,6 +89,13 @@ namespace KinematicCharacterController.Crab
             // Build the CharacterInputs struct
             characterInputs.MoveAxisForward = Input.GetAxisRaw(VerticalInput);
             characterInputs.MoveAxisRight = Input.GetAxisRaw(HorizontalInput);
+            if (Input.GetAxisRaw(VerticalInput) != 0 || Input.GetAxisRaw(HorizontalInput) != 0)
+            {
+                animator.SetInteger("AnimState", 1); 
+            } else
+            {
+                animator.SetInteger("AnimState", 0);
+            }
             characterInputs.CameraRotation = CharacterCamera.Transform.rotation;
             characterInputs.JumpDown = Input.GetKeyDown(KeyCode.Space);
             characterInputs.CrouchDown = Input.GetKeyDown(KeyCode.C);
@@ -95,6 +103,7 @@ namespace KinematicCharacterController.Crab
 
             // Apply inputs to character
             Character.SetInputs(ref characterInputs);
+            animator.SetFloat("WalkSpeed", (Character.Motor.Velocity.magnitude) / 6); 
         }
     }
 }
