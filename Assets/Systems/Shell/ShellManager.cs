@@ -47,7 +47,7 @@ public class ShellManager : MonoBehaviour
 
     }
 
-    public void RemoveSizeChangeListener(OnShellChangeDelegate __del)
+    public void RemoveShellChangeListener(OnShellChangeDelegate __del)
     {
         OnShellChange -= __del;
     }
@@ -135,7 +135,13 @@ public class ShellManager : MonoBehaviour
         WearableShell tempShellClass = __shell.transform.GetChild(0).GetComponent<WearableShell>();
         WearableShell.ShellData tempShellData = tempShellClass.GetShellData();
 
-        if (tempShellData.maxSize < _crabSize) return;
+        if (Mathf.Clamp(_crabSize,tempShellData.minSize,tempShellData.maxSize) != _crabSize)
+        {
+            __shell.GetComponentInChildren<Rigidbody>().AddRelativeForce(-PlayerHolder.transform.right * 10, ForceMode.Impulse);
+            
+
+            return;
+        }
 
 
         if(ShellStatus())

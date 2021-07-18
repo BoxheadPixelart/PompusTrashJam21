@@ -18,21 +18,54 @@ public class SunDamage : MonoBehaviour
     private float sunDPSDelta;
     private float sunWithShellDPSDelta;
 
+    public float RestoreHealthInShadeDPS;
+    private float RestoreHealthInShadeDPSDelta;
+
     public Health HealthScript;
+    private float _health;
+    private float _max_health;
 
     public int CheckForSunlightEveryXSteps = 1;
     private int sunlightCheckCounter = -1;
     public bool inSunlight;
+    private bool prev_in_sunlight = false;
+
 
     private GameObject gameController;
 
+    public bool RenderSunLightCheckPoints = false;
     public List<Transform> sunLightCheckPoints;
 
     public LayerMask IgnoreTheseLayers;
     private LayerMask acceptedLayersBitMask;
 
     private Vector3 angleToSun;
-    
+
+
+
+    #region OnSunChangeDelegate event methods
+
+    // --- the Delegate, for alerting other classes that we've changed XP levels
+    public delegate void OnSunChangeDelegate(bool inSun, float direction);
+    public event OnSunChangeDelegate OnSunChange;
+
+    public void AddSunChangeListener(OnSunChangeDelegate __del)
+    {
+        OnSunChange += __del;
+    }
+
+    public void RemoveSunChangeListener(OnSunChangeDelegate __del)
+    {
+        OnSunChange -= __del;
+    }
+
+
+    #endregion
+
+
+
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -42,33 +75,33 @@ public class SunDamage : MonoBehaviour
         sunDPSDelta = SunDPS / 60f;
         sunWithShellDPSDelta = SunWithShellDPS / 60f;
 
+        RestoreHealthInShadeDPSDelta = RestoreHealthInShadeDPS / 60f;
+
+
         shellManager = gameController.GetComponent<ShellManager>();
 
         HealthScript = gameController.GetComponent<Health>();
 
+        HealthScript.AddHealthChangeListener(OnHealthChange);
+
+        _health = HealthScript.GetHealth();
+        
+        // We assume the player is starting at max health. This is sloppy.  Do not care
+        _max_health = _health;
+
+
+
         // --- Creating the inverted bitmask for the raycast
         LayerMask acceptedLayersBitMask = 0;
-        /*
-        Debug.Log("Default ignored Bitmask is: " + acceptedLayersBitMask);
-
-        foreach(LayerMask ignoreLayer in IgnoreTheseLayers)
-        {
-            acceptedLayersBitMask = acceptedLayersBitMask | ignoreLayer;
-            Debug.Log("Ignored Bitmask included " + ignoreLayer + " and is now " + acceptedLayersBitMask);
-        }
-        acceptedLayersBitMask = ~acceptedLayersBitMask;
-         */
-
-        //acceptedLayersBitMask = LayerMask.GetMask("Default");
-
+        
         acceptedLayersBitMask = ~IgnoreTheseLayers;
 
         Debug.Log("Ignored Bitmask inverted: " + LayerMask.LayerToName(acceptedLayersBitMask) + " (" + (int)acceptedLayersBitMask + ")");
 
         foreach(Transform sclp in sunLightCheckPoints)
         {
-            sclp.GetComponent<Renderer>().enabled = false;
-            sclp.GetComponent<MeshRenderer>().enabled = false;
+           sclp.GetComponent<Renderer>().enabled = RenderSunLightCheckPoints;
+           sclp.GetComponent<MeshRenderer>().enabled = RenderSunLightCheckPoints;
         }
 
     }
@@ -76,9 +109,6 @@ public class SunDamage : MonoBehaviour
     
     void FixedUpdate()
     {
-
-   
-
         if(inSunlight) // if we're in sunlight, check if we still are right away
         {
             
@@ -103,6 +133,11 @@ public class SunDamage : MonoBehaviour
         {
             if (shellManager.ShellStatus()) HealthScript.SubtractHealth(sunWithShellDPSDelta);
             else HealthScript.SubtractHealth(sunDPSDelta);
+        }
+        else if(_health < _max_health)
+        {
+            HealthScript.AddHealth(RestoreHealthInShadeDPSDelta);
+
         }
 
     }
@@ -142,6 +177,19 @@ public class SunDamage : MonoBehaviour
             }
         }
 
+
+        if (areWe != prev_in_sunlight)
+        {
+            prev_in_sunlight = areWe;
+
+            if (OnSunChange != null)
+            {
+                OnSunChange(areWe, 0);
+
+            }
+        }
+
+
         //Debug.Log("SUN DAMAGE: Are we in sunlight? " + areWe);
         return areWe;
 
@@ -160,5 +208,26 @@ public class SunDamage : MonoBehaviour
         return !Physics.Raycast(worldCoords, angleToSun, DistanceToRaycast,acceptedLayersBitMask,QueryTriggerInteraction.Ignore);
 
     }
+
+
+    public float GetAngleToSun()
+    {
+        //float ats = angleToSun - CenterOfMesh.transform.forward;
+
+
+        float dotProd = Vector3.Dot(CenterOfMesh.transform.forward, angleToSun);
+
+        float result = Mathf.Acos(dotProd) * Mathf.Rad2Deg;
+
+        return result;
+
+    }
+
+    private void OnHealthChange(float health, float healthPercent)
+    {
+        _health = health;
+
+    }
+
 
 }

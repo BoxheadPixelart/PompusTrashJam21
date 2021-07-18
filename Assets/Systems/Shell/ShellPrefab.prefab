@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 4498092623074466467}
   - component: {fileID: 4498092623074466470}
   - component: {fileID: 4498092623074466469}
-  - component: {fileID: 4498092623074466468}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: shellMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,20 +82,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4498092623074466468
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4498092623074466466}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1 &4498092623097949429
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +93,7 @@ GameObject:
   - component: {fileID: 4498092623097949430}
   - component: {fileID: 4498092623097949431}
   - component: {fileID: 4498092623097949432}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ShellPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,6 +127,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44672f981f42edd46a52d9fa4d8a2cda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canInteract: 0
+  shellManager: {fileID: 0}
   minSize: 0
   maxSize: 25
 --- !u!54 &4498092623097949432
