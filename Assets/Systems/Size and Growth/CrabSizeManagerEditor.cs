@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
+
+#if UNITY_EDITOR
+using UnityEditor;
 [CustomEditor(typeof(CrabSizeManager))]
+
 public class CrabSizeManagerEditor : Editor
 {
     float scale = 0.0f;
@@ -27,3 +30,4 @@ public class CrabSizeManagerEditor : Editor
         myTarget.SetSize(scale);
     }
 }
+#endif
