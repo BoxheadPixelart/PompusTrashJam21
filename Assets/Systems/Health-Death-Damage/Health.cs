@@ -123,15 +123,6 @@ public class Health : MonoBehaviour
 
 
 
-
-
-
-
-
-
-
-
-
     public void PauseHealthChange()
     {
         DEBUGFreezeHealth = true;

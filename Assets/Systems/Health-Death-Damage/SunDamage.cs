@@ -229,5 +229,11 @@ public class SunDamage : MonoBehaviour
 
     }
 
+    public bool InSunlight()
+    {
+
+        return inSunlight;
+    }
+
 
 }
