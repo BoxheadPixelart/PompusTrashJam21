@@ -55,6 +55,8 @@ using UnityEngine;
 /// <summary>
 /// Component that manages the abstract variable "Size" that controls other behaviors.
 /// </summary>
+/// 
+
 public class CrabSizeManager : MonoBehaviour
 {
     // --- Configurable variables 
@@ -71,7 +73,8 @@ public class CrabSizeManager : MonoBehaviour
     private float crabSizeDefaultIncrease = 25f;
 
     // Float size tracker of crab, and the last time crab size was reported
-    private float _crabSize = 0;
+
+        [SerializeField] private float _crabSize = 0;
     private float _crabSizeLastReported = 0;
 
     public bool DEBUGDisableGrowth;
@@ -158,11 +161,11 @@ public void AddSize(float __sizeAmt)
 
     public void SetSize(float __sizeAmt)
     {
-
-        _crabSize = Mathf.Clamp(__sizeAmt, 0f, crabSizeMaximum);
-
-        _checkForSizeChange();
-
+      //  if (!DEBUGDisableGrowth)
+      //  {
+            _crabSize = Mathf.Clamp(__sizeAmt, 0f, crabSizeMaximum);
+            _checkForSizeChange();
+      //  }
     }
 
 

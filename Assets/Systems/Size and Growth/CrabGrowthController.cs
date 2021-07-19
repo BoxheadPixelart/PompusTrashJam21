@@ -34,6 +34,8 @@ public class SizeVariables
 /// <summary>
 /// Component that manages actual scaling of Crab.
 /// </summary>
+/// 
+
 public class CrabGrowthController : MonoBehaviour
 {
     public GameObject ParentObjectToPhysicallyScale;
@@ -50,10 +52,10 @@ public class CrabGrowthController : MonoBehaviour
 
 
     [SerializeField]
-    public SizeVariables startingSize;
+    public CrabSizeData startingSize;
 
     [SerializeField]
-    public SizeVariables endingSize;
+    public CrabSizeData endingSize;
 
     [SerializeField]
     private float size = 0f;
@@ -78,7 +80,7 @@ public class CrabGrowthController : MonoBehaviour
 
     // --- Connect to character motor
     private KinematicCharacterMotor _CharMotor;
-
+  
 
     // Start is called before the first frame update
     void Start()
@@ -105,7 +107,10 @@ public class CrabGrowthController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        _CrabSizeManager.AddSize();
+        if (!_CrabSizeManager.DEBUGDisableGrowth)
+        {
+            _CrabSizeManager.AddSize();
+        }
     }
 
 
@@ -134,7 +139,10 @@ public class CrabGrowthController : MonoBehaviour
 
 
         // We store "size" so we can call a size update manually if need be, when we switch shells
-        SizeUpdate(size);
+       
+            SizeUpdate(size);
+       
+       
     }
 
     private void SizeUpdate(float __size)
