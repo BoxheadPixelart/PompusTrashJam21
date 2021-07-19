@@ -56,10 +56,26 @@ public class Respawn : DeathManager
 
     }
 
-    public void RemoveDeathListener(OnRespawnDelegate __del)
+    public void RemoveRespawnListener(OnRespawnDelegate __del)
     {
         OnRespawn -= __del;
     }
+
+    public delegate void OnSetRespawnPointDelegate(GameObject PlayerRootObject);
+    public event OnSetRespawnPointDelegate OnSetRespawnPoint;
+
+    public void AddSetRespawnPointListener(OnSetRespawnPointDelegate __del)
+    {
+        OnSetRespawnPoint += __del;
+
+    }
+
+    public void RemoveSetRespawnPointListener(OnSetRespawnPointDelegate __del)
+    {
+        OnSetRespawnPoint -= __del;
+    }
+
+
 
 
     #endregion
@@ -104,6 +120,14 @@ public class Respawn : DeathManager
         if(saveSize)
         {
             respawnSize = crabSizeManager.GetCrabSize();
+        }
+
+
+        // Let everyone know we've set our respawn point
+        if(OnSetRespawnPoint != null)
+        {
+
+            OnSetRespawnPoint(PlayerRootObject);
         }
 
 
