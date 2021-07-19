@@ -9,7 +9,7 @@ public class uiEggs : MonoBehaviour
 
     public Image redEgg;
 
-    private Health healthManager;
+    [SerializeField] private Health healthManager;
     private int NumberOfEggs;
 
     // Start is called before the first frame update

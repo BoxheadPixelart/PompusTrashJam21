@@ -96,7 +96,7 @@ public class SunDamage : MonoBehaviour
         
         acceptedLayersBitMask = ~IgnoreTheseLayers;
 
-        Debug.Log("Ignored Bitmask inverted: " + LayerMask.LayerToName(acceptedLayersBitMask) + " (" + (int)acceptedLayersBitMask + ")");
+      //  Debug.Log("Ignored Bitmask inverted: " + LayerMask.LayerToName(acceptedLayersBitMask) + " (" + (int)acceptedLayersBitMask + ")");
 
         foreach(Transform sclp in sunLightCheckPoints)
         {
