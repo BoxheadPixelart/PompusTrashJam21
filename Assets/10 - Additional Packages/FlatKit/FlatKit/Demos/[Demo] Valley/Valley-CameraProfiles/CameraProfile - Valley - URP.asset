@@ -59,6 +59,121 @@ MonoBehaviour:
     m_Value: 100
     min: -200
     max: 200
+--- !u!114 &-3366348832071815935
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 899c54efeace73346a0a16faa3afe726, type: 3}
+  m_Name: Vignette
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  color:
+    m_OverrideState: 1
+    m_Value: {r: 0.735849, g: 0.33941284, b: 0.30891773, a: 1}
+    hdr: 0
+    showAlpha: 0
+    showEyeDropper: 1
+  center:
+    m_OverrideState: 0
+    m_Value: {x: 0.5, y: 0.5}
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.26
+    min: 0
+    max: 1
+  smoothness:
+    m_OverrideState: 1
+    m_Value: 1
+    min: 0.01
+    max: 1
+  rounded:
+    m_OverrideState: 0
+    m_Value: 0
+--- !u!114 &-2618187438425525063
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97c23e3b12dc18c42a140437e53d3951, type: 3}
+  m_Name: Tonemapping
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  mode:
+    m_OverrideState: 1
+    m_Value: 2
+--- !u!114 &-970886125284447959
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01700fd266d6914ababb731e09af2eb, type: 3}
+  m_Name: DepthOfField
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  mode:
+    m_OverrideState: 1
+    m_Value: 2
+  gaussianStart:
+    m_OverrideState: 1
+    m_Value: 10
+    min: 0
+  gaussianEnd:
+    m_OverrideState: 1
+    m_Value: 30
+    min: 0
+  gaussianMaxRadius:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0.5
+    max: 1.5
+  highQualitySampling:
+    m_OverrideState: 0
+    m_Value: 0
+  focusDistance:
+    m_OverrideState: 1
+    m_Value: 11
+    min: 0.1
+  aperture:
+    m_OverrideState: 1
+    m_Value: 32
+    min: 1
+    max: 32
+  focalLength:
+    m_OverrideState: 1
+    m_Value: 300
+    min: 1
+    max: 300
+  bladeCount:
+    m_OverrideState: 0
+    m_Value: 5
+    min: 3
+    max: 9
+  bladeCurvature:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 1
+  bladeRotation:
+    m_OverrideState: 0
+    m_Value: 180
+    min: -180
+    max: 180
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,6 +192,9 @@ MonoBehaviour:
   - {fileID: 146583711665385311}
   - {fileID: -6114681497226250161}
   - {fileID: 7815889949322535398}
+  - {fileID: -2618187438425525063}
+  - {fileID: -3366348832071815935}
+  - {fileID: -970886125284447959}
 --- !u!114 &146583711665385311
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -95,24 +213,24 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: -0.18
   contrast:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: -14
     min: -100
     max: 100
   colorFilter:
     m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 1.0566038, g: 0.8323247, b: 0.8323247, a: 1}
     hdr: 1
     showAlpha: 0
     showEyeDropper: 1
   hueShift:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
     min: -180
     max: 180
   saturation:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 4
     min: -100
     max: 100
 --- !u!114 &1864786513072897937
@@ -127,11 +245,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81180773991d8724ab7f2d216912b564, type: 3}
   m_Name: ChromaticAberration
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.051
+    m_Value: 0.06
     min: 0
     max: 1
 --- !u!114 &2738656962489078936
@@ -174,6 +292,11 @@ MonoBehaviour:
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 0
+  skipIterations:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 16
   dirtTexture:
     m_OverrideState: 0
     m_Value: {fileID: 0}
