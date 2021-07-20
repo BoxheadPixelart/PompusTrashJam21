@@ -15,5 +15,5 @@ MonoBehaviour:
   name: Can
   mesh: {fileID: 6255687079079774844, guid: 13588157b537ec541b64279a8f8cf1d1, type: 3}
   mat: {fileID: 2100000, guid: 78f8243d716afdc48ab462051002e3dc, type: 2}
-  offsetRotation: {x: 0, y: 0, z: 0}
-  size: {x: 20, y: 20, z: 20}
+  offsetRotation: {x: 90, y: 0, z: 0}
+  size: {x: 30, y: 40, z: 40}

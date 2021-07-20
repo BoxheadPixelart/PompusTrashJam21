@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Fridge
   mesh: {fileID: -7829852743116104297, guid: 790ba0dcf028dbe48a54322b41629b0c, type: 3}
+  mat: {fileID: 2100000, guid: 54ffb7ea4b6744d4bb6ccde979922f61, type: 2}
   offsetRotation: {x: 0, y: 0, z: 0}
-  size: {x: 1, y: 1, z: 1}
+  size: {x: 0.3, y: 0.3, z: 0.3}

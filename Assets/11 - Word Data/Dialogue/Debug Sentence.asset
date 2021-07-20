@@ -18,3 +18,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ef9ba5724520daa4699206b7734536d8, type: 2}
   - {fileID: 11400000, guid: 0dbcffb54234e9841a247be8abe59f17, type: 2}
   - {fileID: 11400000, guid: e3315c86648146349bed708f035e6305, type: 2}
+  timing:
+  - 1
+  - 1
+  - 1
+  - 1
+  - 1

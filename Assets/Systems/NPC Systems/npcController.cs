@@ -12,7 +12,10 @@ public class npcController : MonoBehaviour
     public DialogueData WinSentence;
     public DialogueData FailSentence;
     public Transform dialoguePoint;
-    public WearableShell shell; 
+    public WearableShell shell;
+    public GameObject shellPrefab;
+    public Transform spawnPoint;
+    public Vector3 launchVelo; 
     // Start is called before the first frame update
     void Start()
     {
@@ -116,7 +119,10 @@ public class npcController : MonoBehaviour
 
     public void QuestComplete()
     {
-        shell.SetInteract(true); 
+       // shell.SetInteract(true);
+        GameObject shell = Instantiate(shellPrefab, spawnPoint.position,Quaternion.identity);
+        Rigidbody rb = shell.GetComponent<Rigidbody>(); 
+        rb.velocity = launchVelo; 
     }
     IEnumerator CanTalkTimer()
     {

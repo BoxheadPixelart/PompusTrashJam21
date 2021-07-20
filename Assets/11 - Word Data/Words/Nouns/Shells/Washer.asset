@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Washer
   mesh: {fileID: -4738347606086348555, guid: 8246542dccad2e2438be5bc43f6ead9f, type: 3}
+  mat: {fileID: 2100000, guid: 54ffb7ea4b6744d4bb6ccde979922f61, type: 2}
   offsetRotation: {x: 0, y: 0, z: 0}
-  size: {x: 1, y: 1, z: 1}
+  size: {x: 0.3, y: 0.3, z: 0.3}

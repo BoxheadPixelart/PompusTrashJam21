@@ -55,17 +55,21 @@ public class DialoguePopUpBehaviour : MonoBehaviour
 
         if (isTalking)
         {
-           
+            speechInterval = dialogueData.timing[wordCount];
             speechTime += Time.deltaTime;
           
-            if (speechTime >= speechInterval)
+            if (speechTime >= dialogueData.timing[wordCount])
             {
+                print("Chosen Data: " + dialogueData.name);
+                print("Word Count: " + wordCount);
+                print("Time Ticked to: " + dialogueData.timing[wordCount]); 
                 if (wordCount < dialogueData.sentence.Length - 1)
                 {
                     wordCount += 1; 
                     // BAP 
-                    SetWord(dialogueData.sentence[wordCount]); 
-                    speechTime = 0; 
+                    SetWord(dialogueData.sentence[wordCount]);
+                    speechTime = 0;
+                    print("New time set to: " + dialogueData.timing[wordCount]);
                 } 
                 else 
                 { 
@@ -95,25 +99,29 @@ public class DialoguePopUpBehaviour : MonoBehaviour
         scale += scaleVelo;
         transform.localScale = scale;
         //
-        meshScaleOffset = meshScaleOffset / 1.05f;
-        gMeshScale = baseMeshScale + meshScaleOffset;
-        Vector3[] MeshScaleSpring = Numeric_Springing.Spring_Vector3(meshScale, meshScaleVelo, gMeshScale, .2f, 1f, 3);
-        meshScale = MeshScaleSpring[0];
-        meshScaleVelo = MeshScaleSpring[1];
-        meshScale += meshScaleVelo;
-      
-   
+        //meshScaleOffset = meshScaleOffset / 1.05f;
+        //   gMeshScale = baseMeshScale + meshScaleOffset;
+        // Vector3[] MeshScaleSpring = Numeric_Springing.Spring_Vector3(meshScale, meshScaleVelo, gMeshScale, .5f, 1f, 3);
+        // meshScale = MeshScaleSpring[0];
+        // meshScaleVelo = MeshScaleSpring[1];
+        // meshScale += meshScaleVelo;
+        //meshScale = gMeshScale; 
+
+
         wordMesh.transform.localScale = meshScale;
         transform.LookAt(Camera.main.transform); 
     }
 
     void SetWord(WordData newWord)
     {
-     //   float random = 1 + UnityEngine.Random.Range(-2, 2); 
-        meshScaleOffset = new Vector3(.5f, 0, -.5f);
+        //   float random = 1 + UnityEngine.Random.Range(-2, 2); 
+        meshScale = newWord.size; 
+        meshScaleOffset = Vector3.one;
         wordMesh.mesh = newWord.mesh;
-        render.material = newWord.mat; 
+        render.material = newWord.mat;
+      
         rotOffset = newWord.offsetRotation;
+        wordMesh.transform.localRotation = Quaternion.Euler(Vector3.zero + rotOffset);
         baseMeshScale = newWord.size; 
     }
 
@@ -121,7 +129,7 @@ public class DialoguePopUpBehaviour : MonoBehaviour
     {
         if (!isOpen)
         {
-            gScale = Vector3.one;
+            gScale = new Vector3(3, 3, 3); 
             isOpen = true;
             StartTalking();
         }
@@ -130,6 +138,7 @@ public class DialoguePopUpBehaviour : MonoBehaviour
     {
         wordCount = 0;
         speechTime = 0;
+        speechInterval = dialogueData.timing[wordCount];
         SetWord(dialogueData.sentence[wordCount]);
         isTalking = true; 
     }
