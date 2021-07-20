@@ -188,9 +188,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4651174584074268492}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.000000104308114}
-  m_LocalPosition: {x: 3.8721628, y: 2.3838265, z: 2.4031405}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 4.1809, y: 2.3911, z: 2.4888}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 4651174584036279921}
   - {fileID: 4651174583506450235}
@@ -217,7 +217,8 @@ MonoBehaviour:
   otherDebugKey: 109
   wordMesh: {fileID: 4651174585293348336}
   emotionMesh: {fileID: 4651174584360814889}
-  speechInterval: 5
+  render: {fileID: 4651174585293348337}
+  speechInterval: 3
 --- !u!1 &4651174584210482061
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +319,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4651174584360814892
 Transform:
   m_ObjectHideFlags: 0
@@ -420,8 +421,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4651174585032803081}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.019}
-  m_LocalScale: {x: 1, y: 1, z: 0.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 0.14857}
   m_Children:
   - {fileID: 4651174585293348339}
   m_Father: {fileID: 4651174584074268491}
@@ -454,7 +455,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4651174585293348340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.000000052154057, y: -0.16000009, z: 3.74}
+  m_LocalPosition: {x: 0, y: 0, z: 3.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4651174585032803080}

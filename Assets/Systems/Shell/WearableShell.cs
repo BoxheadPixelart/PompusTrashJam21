@@ -24,7 +24,7 @@ public class WearableShell : InteractableBase
         shellData.minSize = minSize;
         shellData.maxSize = maxSize;
         shellManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<ShellManager>();
-        SetInteract(true); 
+       // SetInteract(true); 
     }
 
     public override void Action(InteractionManager manager)

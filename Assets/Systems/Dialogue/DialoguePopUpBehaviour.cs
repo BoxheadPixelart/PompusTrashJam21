@@ -24,6 +24,7 @@ public class DialoguePopUpBehaviour : MonoBehaviour
     [SerializeField] private KeyCode otherDebugKey;
     [SerializeField] private MeshFilter wordMesh;
     [SerializeField] private MeshFilter emotionMesh;
+    [SerializeField] private Renderer render; 
     //
     private float speechTime;
     private int wordCount; 
@@ -56,7 +57,7 @@ public class DialoguePopUpBehaviour : MonoBehaviour
         {
            
             speechTime += Time.deltaTime;
-            wordMesh.transform.rotation = Quaternion.Euler(rotOffset.x, speechTime * 90, rotOffset.z);
+          
             if (speechTime >= speechInterval)
             {
                 if (wordCount < dialogueData.sentence.Length - 1)
@@ -73,6 +74,10 @@ public class DialoguePopUpBehaviour : MonoBehaviour
                     isTalking = false;
                     CloseDialogue();
                 }
+            }
+            if (dialogueData.sentence[wordCount].GetType() != typeof(VerbData))
+            {
+                wordMesh.transform.rotation = Quaternion.Euler(rotOffset.x, speechTime * 90, rotOffset.z);
             }
         } 
     }
@@ -105,8 +110,9 @@ public class DialoguePopUpBehaviour : MonoBehaviour
     void SetWord(WordData newWord)
     {
      //   float random = 1 + UnityEngine.Random.Range(-2, 2); 
-        meshScaleOffset = new Vector3(1, 0, -1);
+        meshScaleOffset = new Vector3(.5f, 0, -.5f);
         wordMesh.mesh = newWord.mesh;
+        render.material = newWord.mat; 
         rotOffset = newWord.offsetRotation;
         baseMeshScale = newWord.size; 
     }

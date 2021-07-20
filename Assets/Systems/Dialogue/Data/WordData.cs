@@ -5,6 +5,7 @@ public class WordData : ScriptableObject
 {
   public string name;
     public Mesh mesh;
+    public Material mat; 
     public Vector3 offsetRotation;
     public Vector3 size; 
 
