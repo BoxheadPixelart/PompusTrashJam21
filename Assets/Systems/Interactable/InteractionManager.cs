@@ -28,6 +28,10 @@ public class InteractionManager : MonoBehaviour
             {
 
                 interact = GetClosestEnemy(nearbyInteracts, playerRoot).gameObject.GetComponent<InteractableBase>();
+                if (interact is null)
+                {
+                    nearbyInteracts.Clear(); 
+                }
                 print(interact);
                 if (interact.GetType() == typeof(WearableShell))
                 {

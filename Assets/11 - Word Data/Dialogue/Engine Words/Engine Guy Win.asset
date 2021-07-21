@@ -15,7 +15,7 @@ MonoBehaviour:
   sentence:
   - {fileID: 11400000, guid: db509fdf1badbca45b85502d798358fa, type: 2}
   - {fileID: 11400000, guid: 22aaca600c75fc64280db940fa57a52b, type: 2}
-  - {fileID: 11400000, guid: 0054bb1d60ecc18478f271fc7de303d3, type: 2}
+  - {fileID: 11400000, guid: ea6785bddf603b44e90f90212cf515d2, type: 2}
   timing:
   - 3
   - 1.25
