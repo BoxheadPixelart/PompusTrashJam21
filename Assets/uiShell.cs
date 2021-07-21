@@ -23,6 +23,8 @@ public class uiShell : MonoBehaviour
     public float FlashRatePerSecond;
     private int FlashRate;
     private int FlashRateCount;
+    private int FlashRate_Half;
+
 
     private GameObject gameManager;
     private ShellManager shellManager;
@@ -53,7 +55,8 @@ public class uiShell : MonoBehaviour
         ShellOuterCon.TweenOut();
         ShellInteriorCon.TweenOut();
 
-        FlashRate = 2 * (int)Mathf.Floor(60f * FlashRatePerSecond);
+        FlashRate_Half = (int)Mathf.Floor(60f * FlashRatePerSecond);
+        FlashRate = 2 * FlashRate_Half;
 
     }
 
@@ -93,7 +96,11 @@ public class uiShell : MonoBehaviour
 
     private void _setShellUI()
     {
+        // Flash Rate is multiplied by 2 at the start (FlashRate_Half), so after we pass the middle, we subtract the lerp from 1
+        // why?  This lets the alpha fade smoothly in and out
         FlashRateCount = (FlashRateCount + 1) % FlashRate;
+
+        int singleFlashRateCount = FlashRateCount % (FlashRate_Half);
 
         ShellInterior.fillAmount = Mathf.InverseLerp(shellData.minSize + ClampSizeFloat, shellData.maxSize - ClampSizeFloat, _size);
 
@@ -102,7 +109,8 @@ public class uiShell : MonoBehaviour
         if (_size >= (_baseLine - WarningStartsAtXBeforeEndOfSize))
         {
             //float _lerp = Mathf.InverseLerp(_baseLine - WarningStartsAtXBeforeEndOfSize, _baseLine, _size);
-            float _lerp = Mathf.InverseLerp(0, FlashRate - 1, FlashRateCount);
+            float _lerp = Mathf.InverseLerp(0, FlashRate_Half - 1, singleFlashRateCount);
+            if (FlashRateCount >= FlashRate_Half) _lerp = 1 - _lerp;
             
             //Color _col = Color.Lerp(StandardColor, WarningColor, _lerp);
             Color _col = WarningColor;
