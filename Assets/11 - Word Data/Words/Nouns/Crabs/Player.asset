@@ -16,4 +16,4 @@ MonoBehaviour:
   mesh: {fileID: 1911380589333708599, guid: d92738b77dbe44d468540ff8f87cca8a, type: 3}
   mat: {fileID: 2100000, guid: 617fc176cdd75394999ed06b307ce9b5, type: 2}
   offsetRotation: {x: 0, y: 0, z: 0}
-  size: {x: 0.5, y: 0.5, z: 0.5}
+  size: {x: 0.4, y: 0.4, z: 0.4}

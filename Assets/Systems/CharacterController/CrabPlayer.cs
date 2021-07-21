@@ -37,7 +37,7 @@ namespace KinematicCharacterController.Crab
             // {
             //    Cursor.lockState = CursorLockMode.Locked;
             //```` }
-            cameraTarget.position = Character.Motor.transform.position; 
+            cameraTarget.position = Character.Motor.transform.position + new Vector3(0,1,0); 
             HandleCharacterInput();
         }
 

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Engine
   mesh: {fileID: 1921601982914219809, guid: b9364530afc8cce4cb2bc16081d2f465, type: 3}
+  mat: {fileID: 2100000, guid: 54ffb7ea4b6744d4bb6ccde979922f61, type: 2}
   offsetRotation: {x: 0, y: 0, z: 0}
-  size: {x: 1, y: 1, z: 1}
+  size: {x: 0.3, y: 0.3, z: 0.3}

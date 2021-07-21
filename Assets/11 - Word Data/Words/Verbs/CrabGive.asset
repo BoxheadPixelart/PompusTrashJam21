@@ -15,6 +15,6 @@ MonoBehaviour:
   name: Give
   mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
   mat: {fileID: 2100000, guid: 8b534c027dd41c8419520f5e9110d78b, type: 2}
-  offsetRotation: {x: 0, y: 0, z: 0}
+  offsetRotation: {x: 0, y: 180, z: 0}
   size: {x: 2, y: 2, z: 2}
   material: {fileID: 2100000, guid: 8b534c027dd41c8419520f5e9110d78b, type: 2}

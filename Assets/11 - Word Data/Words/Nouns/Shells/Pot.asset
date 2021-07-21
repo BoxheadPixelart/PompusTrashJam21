@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Pot
   mesh: {fileID: 7146012730993768212, guid: f41ab337ff8e0114ebc68b571c5d0bab, type: 3}
+  mat: {fileID: 2100000, guid: 1cf4f3f5b6ec37e4fa6141a24208f346, type: 2}
   offsetRotation: {x: 0, y: 0, z: 0}
-  size: {x: 1, y: 1, z: 1}
+  size: {x: 0.3, y: 0.3, z: 0.3}
