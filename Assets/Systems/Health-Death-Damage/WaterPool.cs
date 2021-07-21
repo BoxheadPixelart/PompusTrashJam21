@@ -11,7 +11,7 @@ public class WaterPool : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        hp = GameObject.FindGameObjectWithTag("GameController").GetComponent<Health>(); 
     }
 
     // Update is called once per frame
