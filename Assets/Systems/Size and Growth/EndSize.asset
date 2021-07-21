@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: EndSize
   m_EditorClassIdentifier: 
   characterScale: 4
-  rigidbodyMass: 1
-  capsuleRadius: 0.5
-  crouchedHeight: 1
-  capsuleHeight: 2
-  capsuleYOffset: 1
+  rigidbodyMass: 100
+  capsuleRadius: 1.5
+  crouchedHeight: 3.5
+  capsuleHeight: 5
+  capsuleYOffset: 2
   cameraFOV: 75
   cameraDefaultDistance: 50
   cameraMinDistance: 30
   cameraMaxDistance: 50
-  characterStableMovementSpeed: 15
+  characterStableMovementSpeed: 35
   characterStableMovementSharpness: 20
   characterMaxStableSlopeAngle: 60
-  characterMaxStepHeight: 1
+  characterMaxStepHeight: 4
   characterOrentationSharpness: 8
-  characterJumpUpSpeed: 10
+  characterJumpUpSpeed: 20
   characterAirMoveSpeed: 15
-  characterAirAccelerationSpeed: 15
+  characterAirAccelerationSpeed: 0
