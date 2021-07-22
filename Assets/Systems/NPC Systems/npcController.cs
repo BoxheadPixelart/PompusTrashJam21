@@ -16,13 +16,20 @@ public class npcController : MonoBehaviour
     public GameObject shellPrefab;
     public Transform spawnPoint;
     public Vector3 launchVelo;
-    public Transform playerSpawnPoint;
     
+    private Respawn respawnManager;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        GameObject __gm = GameObject.FindGameObjectWithTag("GameController");
+        respawnManager = __gm.GetComponent<Respawn>();
+
         shell.SetInteract(false);
         canTalk = true; 
+
+
     }
 
     // Update is called once per frame
@@ -39,6 +46,7 @@ public class npcController : MonoBehaviour
             {
                 print("Is Player"); 
                 Speak(desireSentence);
+                respawnManager.SetRespawnPoint(spawnPoint);
                 print("Has Spoken");
             }
             else

@@ -93,7 +93,7 @@ public class Respawn : DeathManager
         GameObject __gm = GameObject.FindGameObjectWithTag("GameController");
 
         shellManager = __gm.GetComponent<ShellManager>();
-
+        
         crabSizeManager = __gm.GetComponent<CrabSizeManager>();
 
         if(PlayerRootObject == null)
