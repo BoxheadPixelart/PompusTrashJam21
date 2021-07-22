@@ -30,6 +30,10 @@ public class Respawn : DeathManager
 
     private Transform RespawnPoint;
     private float respawnSize;
+    private GameObject respawnShell;
+
+
+    private ShellManager shellManager;
 
     public Health healthScript;
 
@@ -86,7 +90,11 @@ public class Respawn : DeathManager
     // Start is called before the first frame update
     void Start()
     {
-        crabSizeManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<CrabSizeManager>();
+        GameObject __gm = GameObject.FindGameObjectWithTag("GameController");
+
+        shellManager = __gm.GetComponent<ShellManager>();
+        
+        crabSizeManager = __gm.GetComponent<CrabSizeManager>();
 
         if(PlayerRootObject == null)
         {
@@ -94,6 +102,8 @@ public class Respawn : DeathManager
         }
 
         PlayerMotorObject = PlayerRootObject.GetComponentInChildren<KinematicCharacterController.KinematicCharacterMotor>();
+
+        
 
 
         healthScript.AddDeathListener(_OnDeath);
@@ -108,6 +118,8 @@ public class Respawn : DeathManager
         RespawnPoint = DefaultRespawnPoint;
 
         respawnSize = crabSizeManager.GetCrabSize();
+        respawnShell = null;
+
     }
 
 
@@ -120,11 +132,20 @@ public class Respawn : DeathManager
         if(saveSize)
         {
             respawnSize = crabSizeManager.GetCrabSize();
+
+            if (shellManager.ShellStatus())
+            {
+                respawnShell = shellManager.GetShellID();
+            }
+
+            else respawnShell = null;
+
         }
 
 
+
         // Let everyone know we've set our respawn point
-        if(OnSetRespawnPoint != null)
+        if (OnSetRespawnPoint != null)
         {
 
             OnSetRespawnPoint(PlayerRootObject);
@@ -145,6 +166,14 @@ public class Respawn : DeathManager
         //PlayerMotorObject.transform.position = respn.transform.position;
         //PlayerMotorObject.transform.rotation = respn.transform.rotation;
 
+        if(shellManager.ShellStatus())
+        {
+            if(shellManager.GetShellID() != respawnShell)
+            {
+                shellManager.UnequipShell();
+            }
+        }
+
         PlayerMotorObject.SetPositionAndRotation(respn.position, respn.rotation, true);
 
         if(OnRespawn != null)
@@ -156,6 +185,15 @@ public class Respawn : DeathManager
 
         healthScript.ResetHealth();
         crabSizeManager.SetSize(respawnSize);
+
+        if (respawnShell != null)
+        {
+            shellManager.EquipShell(respawnShell);
+
+        }
+
+
+
     }
 
 

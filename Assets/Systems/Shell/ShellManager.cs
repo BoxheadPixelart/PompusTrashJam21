@@ -211,5 +211,14 @@ public class ShellManager : MonoBehaviour
 
     }
 
+
+    public GameObject GetShellID()
+    {
+
+        if (currentShell == null) return null;
+        else return currentShell;
+
+    }
+
 }
 
