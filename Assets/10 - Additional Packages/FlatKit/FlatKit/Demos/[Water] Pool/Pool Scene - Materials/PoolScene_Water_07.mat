@@ -87,7 +87,7 @@ Material:
     - _Depth: 100
     - _DstBlend: 0
     - _EnvironmentReflections: 1
-    - _FadeDistance: 0.5
+    - _FadeDistance: 23.29
     - _FoamAmount: 0.14
     - _FoamDepth: 0.13
     - _FoamDirection: 0
@@ -128,8 +128,8 @@ Material:
     - _Surface: 0
     - _UvFadeX: 0.1
     - _UvFadeY: 0.1
-    - _WaterClearness: 0.094
-    - _WaterDepth: 4.81
+    - _WaterClearness: 0
+    - _WaterDepth: 379.86
     - _WaveAmplitude: 0.2
     - _WaveDirection: 0
     - _WaveFrequency: 25.21
