@@ -29,7 +29,8 @@ public class Health : MonoBehaviour
     private int respawn_NumberOfEggs;
     private float respawn_health;
     private int old_numberOfEggs;
-    public AudioSource sizzle; 
+    public AudioSource sizzle;
+    public AudioSource crack; 
     public GameObject CharacterRootObject;
 
     public bool DEBUGFreezeHealth;
@@ -227,6 +228,7 @@ public class Health : MonoBehaviour
 
     void SubtractEgg(int number)
     {
+        crack.Play(); 
         NumberOfEggs = Mathf.Clamp(NumberOfEggs - number, 0, MaxNumberOfEggs);
         if(NumberOfEggs != old_numberOfEggs)
         {
