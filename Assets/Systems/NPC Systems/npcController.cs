@@ -15,7 +15,9 @@ public class npcController : MonoBehaviour
     public WearableShell shell;
     public GameObject shellPrefab;
     public Transform spawnPoint;
-    public Vector3 launchVelo; 
+    public Vector3 launchVelo;
+    public Transform playerSpawnPoint;
+    
     // Start is called before the first frame update
     void Start()
     {
