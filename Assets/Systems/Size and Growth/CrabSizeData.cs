@@ -25,5 +25,9 @@ public class CrabSizeData : ScriptableObject
     public float characterJumpUpSpeed = 10;
     public float characterAirMoveSpeed = 15;
     public float characterAirAccelerationSpeed = 15;
+    public float cameraDOFFocalDistance = 8f;
+    public float cameraDOFFocalLength = 201f;
+    public float cameraDOFAperture = 19.3f;
+
 
 }

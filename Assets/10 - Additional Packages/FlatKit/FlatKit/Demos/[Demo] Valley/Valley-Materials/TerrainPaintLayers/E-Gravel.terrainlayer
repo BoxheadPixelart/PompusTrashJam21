@@ -6,16 +6,16 @@ TerrainLayer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TerrainPaintLayer-9
-  m_DiffuseTexture: {fileID: 2800000, guid: a8bca3875e7049840a1ac12a5dab54c1, type: 3}
-  m_NormalMapTexture: {fileID: 2800000, guid: b96da5aed2e79fa478619408e4fb4d11, type: 3}
+  m_Name: E-Gravel
+  m_DiffuseTexture: {fileID: 2800000, guid: 36693c54bf9f00045b0e42ba4f300547, type: 3}
+  m_NormalMapTexture: {fileID: 2800000, guid: ab971e789e8dcc84d905fd817f55ba3f, type: 3}
   m_MaskMapTexture: {fileID: 0}
-  m_TileSize: {x: 300, y: 300}
-  m_TileOffset: {x: 31.98, y: 0}
-  m_Specular: {r: 1, g: 1, b: 1, a: 0.6156863}
+  m_TileSize: {x: 50, y: 50}
+  m_TileOffset: {x: 0, y: 0}
+  m_Specular: {r: 0, g: 0, b: 0, a: 0}
   m_Metallic: 0
   m_Smoothness: 0
-  m_NormalScale: 1.5
+  m_NormalScale: 1
   m_DiffuseRemapMin: {x: 0, y: 0, z: 0, w: 0}
   m_DiffuseRemapMax: {x: 1, y: 1, z: 1, w: 1}
   m_MaskMapRemapMin: {x: 0, y: 0, z: 0, w: 0}

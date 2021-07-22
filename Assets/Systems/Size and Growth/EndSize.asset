@@ -30,3 +30,6 @@ MonoBehaviour:
   characterJumpUpSpeed: 20
   characterAirMoveSpeed: 15
   characterAirAccelerationSpeed: 0
+  cameraDOFFocalDistance: 26.8
+  cameraDOFFocalLength: 250.6
+  cameraDOFAperture: 4.7

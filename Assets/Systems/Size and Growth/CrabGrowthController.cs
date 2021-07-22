@@ -72,7 +72,7 @@ public class CrabGrowthController : MonoBehaviour
     private float _shellSpeedDebuffAtMaximum = 0.7f;
 
 
-
+    private PostProcessingController _postProcessingController;
 
     // ---- Connect to the crabSizeManager
     private CrabSizeManager _CrabSizeManager;
@@ -91,6 +91,9 @@ public class CrabGrowthController : MonoBehaviour
         if (_CrabSizeManager == null) Debug.Log(this.name.ToString() + " couldn't find CrabSizeManager.");
 
         _CrabSizeManager.AddSizeChangeListener(SizeUpdate);
+
+        // Connect to the post processing controller
+        _postProcessingController = __gm.GetComponent<PostProcessingController>();
 
         // Prepare our KinematicCharacterMotor
         _CharMotor = this.GetComponent<KinematicCharacterMotor>();
@@ -225,6 +228,18 @@ public class CrabGrowthController : MonoBehaviour
 
 
         #endregion
+
+
+        #region Post Processing controls
+
+        float __cameraDOFFocalDistance = Mathf.Lerp(startingSize.cameraDOFFocalDistance, endingSize.cameraDOFFocalDistance, __size);
+        float __cameraDOFFocalLength = Mathf.Lerp(startingSize.cameraDOFFocalLength, endingSize.cameraDOFFocalLength, __size);
+        float __cameraDOFAperture = Mathf.Lerp(startingSize.cameraDOFAperture, endingSize.cameraDOFAperture, __size);
+
+        _postProcessingController.SetCameraDOF(__cameraDOFFocalDistance, __cameraDOFFocalLength, __cameraDOFAperture);
+        
+        #endregion
+
 
 
         /*

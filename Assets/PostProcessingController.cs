@@ -134,5 +134,18 @@ public class PostProcessingController : MonoBehaviour
     }
 
 
+    public void SetCameraDOF(float cameraDOFFocalDistance, float cameraDOFFocalLength, float cameraDOFAperture)
+    {
+
+        depthOfField.focusDistance.overrideState = true;
+        depthOfField.focusDistance.value = cameraDOFFocalDistance;
+
+        depthOfField.focalLength.overrideState = true;
+        depthOfField.focalLength.value = cameraDOFFocalLength;
+
+        depthOfField.aperture.overrideState = true;
+        depthOfField.aperture.value = cameraDOFAperture;
+
+    }
 
 }
