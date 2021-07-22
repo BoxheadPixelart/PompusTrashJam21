@@ -19,6 +19,9 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    private float HealthToRestore = 0.50f;
+
+
     public float health;
     public float maxHealth;
     public int NumberOfEggs;
@@ -190,7 +193,7 @@ public class Health : MonoBehaviour
         {
             SubtractEgg(1);
 
-            health = 0.25f * maxHealth;
+            health = HealthToRestore * maxHealth;
 
             if(NumberOfEggs <= 0)
             {
