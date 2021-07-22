@@ -1,19 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22de16bebe2a13c4f8ad0d5e783d338c, type: 3}
-  m_Name: Pot
-  m_EditorClassIdentifier: 
-  name: Pot
-  mesh: {fileID: 7146012730993768212, guid: f41ab337ff8e0114ebc68b571c5d0bab, type: 3}
-  mat: {fileID: 2100000, guid: 1cf4f3f5b6ec37e4fa6141a24208f346, type: 2}
-  offsetRotation: {x: 0, y: 0, z: 0}
-  size: {x: 0.3, y: 0.3, z: 0.3}
+version https://git-lfs.github.com/spec/v1
+oid sha256:4d98cca1a21b698e0bae9457b8f8eeb90fb736aac7b6d2212ab18eb9eef75fdc
+size 635

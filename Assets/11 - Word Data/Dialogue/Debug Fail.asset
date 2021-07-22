@@ -1,26 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0871946b035766447a90f515e4269ea3, type: 3}
-  m_Name: Debug Fail
-  m_EditorClassIdentifier: 
-  sentence:
-  - {fileID: 11400000, guid: e028e7cf44454f048b73b97e92c3aa79, type: 2}
-  - {fileID: 11400000, guid: e028e7cf44454f048b73b97e92c3aa79, type: 2}
-  - {fileID: 11400000, guid: e028e7cf44454f048b73b97e92c3aa79, type: 2}
-  - {fileID: 11400000, guid: e028e7cf44454f048b73b97e92c3aa79, type: 2}
-  - {fileID: 11400000, guid: e028e7cf44454f048b73b97e92c3aa79, type: 2}
-  timing:
-  - 1
-  - 1
-  - 1
-  - 1
-  - 1
+version https://git-lfs.github.com/spec/v1
+oid sha256:4c64006266c671185c322e2732a985c11918a92b610e2e381818f6824c550ee9
+size 811

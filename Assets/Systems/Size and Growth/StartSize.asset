@@ -1,35 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80736bf02b1f0ed4b885d2e11fdb94c5, type: 3}
-  m_Name: StartSize
-  m_EditorClassIdentifier: 
-  characterScale: 0.8
-  rigidbodyMass: 1
-  capsuleRadius: 0.5
-  crouchedHeight: 1
-  capsuleHeight: 2
-  capsuleYOffset: 1
-  cameraFOV: 75
-  cameraDefaultDistance: 6
-  cameraMinDistance: 0
-  cameraMaxDistance: 10
-  characterStableMovementSpeed: 15
-  characterStableMovementSharpness: 20
-  characterMaxStableSlopeAngle: 60
-  characterMaxStepHeight: 1
-  characterOrentationSharpness: 8
-  characterJumpUpSpeed: 10
-  characterAirMoveSpeed: 15
-  characterAirAccelerationSpeed: 15
-  cameraDOFFocalDistance: 12.2
-  cameraDOFFocalLength: 146.1
-  cameraDOFAperture: 5.2
+version https://git-lfs.github.com/spec/v1
+oid sha256:432cc187808c7ae0678f5629754f8293e56e197fbeefa15567a3b8d1ef444d1d
+size 957

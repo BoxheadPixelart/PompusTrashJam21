@@ -1,26 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0871946b035766447a90f515e4269ea3, type: 3}
-  m_Name: Engine Guy Tutorial
-  m_EditorClassIdentifier: 
-  sentence:
-  - {fileID: 11400000, guid: 0a33fd80402074a478e4c6b0dc7f5154, type: 2}
-  - {fileID: 11400000, guid: 06ea9bc6fcbfe1d43864f2172737648c, type: 2}
-  - {fileID: 11400000, guid: 0a33fd80402074a478e4c6b0dc7f5154, type: 2}
-  - {fileID: 11400000, guid: 22aaca600c75fc64280db940fa57a52b, type: 2}
-  - {fileID: 11400000, guid: ea6785bddf603b44e90f90212cf515d2, type: 2}
-  timing:
-  - 2.5
-  - 1.25
-  - 2.5
-  - 1.25
-  - 2.5
+version https://git-lfs.github.com/spec/v1
+oid sha256:0619dae672c64b360abe902fe7e902d94eb1cd9e8d75de2ef3e905e166db3b3a
+size 832

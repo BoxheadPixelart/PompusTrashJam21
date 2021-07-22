@@ -26,7 +26,7 @@ public class Health : MonoBehaviour
     private int respawn_NumberOfEggs;
     private float respawn_health;
     private int old_numberOfEggs;
-
+    public AudioSource sizzle; 
     public GameObject CharacterRootObject;
 
     public bool DEBUGFreezeHealth;
@@ -156,7 +156,10 @@ public class Health : MonoBehaviour
     public void SubtractHealth(float __health)
     {
         _AddHealth(-__health);
-
+        if (__health > 5)
+        {
+            sizzle.Play();
+        }
     }
 
     public float GetHealth()

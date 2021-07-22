@@ -1,35 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80736bf02b1f0ed4b885d2e11fdb94c5, type: 3}
-  m_Name: EndSize
-  m_EditorClassIdentifier: 
-  characterScale: 4
-  rigidbodyMass: 100
-  capsuleRadius: 1.5
-  crouchedHeight: 3.5
-  capsuleHeight: 5
-  capsuleYOffset: 2
-  cameraFOV: 75
-  cameraDefaultDistance: 50
-  cameraMinDistance: 30
-  cameraMaxDistance: 50
-  characterStableMovementSpeed: 35
-  characterStableMovementSharpness: 20
-  characterMaxStableSlopeAngle: 60
-  characterMaxStepHeight: 4
-  characterOrentationSharpness: 8
-  characterJumpUpSpeed: 20
-  characterAirMoveSpeed: 15
-  characterAirAccelerationSpeed: 0
-  cameraDOFFocalDistance: 26.8
-  cameraDOFFocalLength: 250.6
-  cameraDOFAperture: 4.7
+version https://git-lfs.github.com/spec/v1
+oid sha256:deff01bbeb7abf17d403195671b15adfdd2a7f1c0afa6032f1b1fcd1699b0895
+size 958

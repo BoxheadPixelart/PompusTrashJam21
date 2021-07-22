@@ -41,8 +41,8 @@ public class SunDamage : MonoBehaviour
 
     private Vector3 angleToSun;
 
-
-
+    public AudioSource sizzle; 
+   
     #region OnSunChangeDelegate event methods
 
     // --- the Delegate, for alerting other classes that we've changed XP levels
@@ -131,8 +131,19 @@ public class SunDamage : MonoBehaviour
         // if we're in sunlight, take damage
         if (inSunlight)
         {
-            if (shellManager.ShellStatus()) HealthScript.SubtractHealth(sunWithShellDPSDelta);
-            else HealthScript.SubtractHealth(sunDPSDelta);
+            if (shellManager.ShellStatus())
+            {
+                HealthScript.SubtractHealth(sunWithShellDPSDelta);
+            }
+            else
+            {
+                HealthScript.SubtractHealth(sunDPSDelta);
+                if (!sizzle.isPlaying)
+                {
+                    sizzle.Play();
+                }
+            
+            }
         }
         else if(_health < _max_health)
         {
