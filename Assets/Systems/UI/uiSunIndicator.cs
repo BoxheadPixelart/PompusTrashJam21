@@ -15,7 +15,7 @@ public class uiSunIndicator : MonoBehaviour
 
     private PanelController SunDamagePanelCon;
     private PanelController SunSafePanelCon;
-
+    public AudioSource sizzle; 
 
     private bool inSun;
     private float angleToSun2D;
@@ -65,6 +65,8 @@ public class uiSunIndicator : MonoBehaviour
                     //SunDamage.SetActive(true);
                     //SunSafe.SetActive(false);
                     SunDamagePanelCon.Tween();
+                   //izzle.Stop();
+
                     SunSafePanelCon.TweenOut();
 
                     break;
@@ -73,6 +75,11 @@ public class uiSunIndicator : MonoBehaviour
                 {
                     SunSafePanelCon.Tween();
                     SunDamagePanelCon.TweenOut();
+                    if (sizzle.isPlaying)
+                    {
+                        sizzle.Stop();
+                    }
+                  //sizzle.Stop();
                     //SunDamage.SetActive(false);
                     //SunSafe.SetActive(true);
 

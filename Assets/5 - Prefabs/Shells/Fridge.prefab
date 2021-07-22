@@ -145,9 +145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44672f981f42edd46a52d9fa4d8a2cda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canInteract: 0
+  canInteract: 1
   shellManager: {fileID: 0}
-  minSize: 55
+  minSize: 45
   maxSize: 75
 --- !u!65 &6897047277156244177
 BoxCollider:

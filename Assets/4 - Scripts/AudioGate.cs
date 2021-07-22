@@ -24,11 +24,11 @@ public class AudioGate : MonoBehaviour
             }
             if (isTrack2)
             {
-
+            ost.Play2();
             }
             if (isTrack3)
             {
-
+             ost.Play3();
             }
         }
         }
