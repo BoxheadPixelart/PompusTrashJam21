@@ -35,11 +35,12 @@ public class Health : MonoBehaviour
 
     public bool DEBUGFreezeHealth;
 
-    private Respawn respawnController;
+    public Respawn respawnController;
 
 
-    private void Start()
+    private void Awake()
     {
+        print("Player Start"); 
         if(CharacterRootObject == null) CharacterRootObject = GameObject.FindGameObjectWithTag("Player");
         if (NumberOfEggs == 0) NumberOfEggs = 7;
 
@@ -47,15 +48,15 @@ public class Health : MonoBehaviour
         old_numberOfEggs = NumberOfEggs;
 
 
-        GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
-        respawnController = gameController.GetComponent<Respawn>();
+     //   GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
+      //  respawnController = gameController.GetComponent<Respawn>();
 
         respawnController.AddRespawnListener(OnRespawn);
         respawnController.AddSetRespawnPointListener(OnRespawnSet);
 
         respawn_NumberOfEggs = NumberOfEggs;
         respawn_health = health;
-
+        print("Player End");
     }
 
 
@@ -64,12 +65,15 @@ public class Health : MonoBehaviour
 
     // --- the Delegate, for alerting other classes that we've changed XP levels
     public delegate void OnHealthChangeDelegate(float health, float healthPercentage);
-    public event OnHealthChangeDelegate OnHealthChange;
+    public OnHealthChangeDelegate OnHealthChange = delegate { }; 
 
     public void AddHealthChangeListener(OnHealthChangeDelegate __del)
     {
-        OnHealthChange += __del;
-
+       // print("A");
+        //print(OnHealthChange);
+        //print(" _DEL: " + __del);
+       // OnHealthChange += __del;
+        //print("B");
     }
 
     public void RemoveHealthChangeListener(OnHealthChangeDelegate __del)
@@ -160,10 +164,6 @@ public class Health : MonoBehaviour
     public void SubtractHealth(float __health)
     {
         _AddHealth(-__health);
-        if (__health > 5)
-        {
-            sizzle.Play();
-        }
     }
 
     public float GetHealth()
@@ -177,16 +177,23 @@ public class Health : MonoBehaviour
 
     {
         if (DEBUGFreezeHealth) return;
-
+        print("7" + " WE ARE IN THE HEALTH SCRIPT"); 
         float __oldhealth = health;
 
         health = Mathf.Clamp(health + __health, 0, maxHealth);
 
         if (health != __oldhealth)
         {
+            print("8");
             if (OnHealthChange != null)
             {
-                OnHealthChange(health, health/maxHealth);
+                print("9");
+                print(health);
+                print( maxHealth);
+                print(OnHealthChange);
+                print("test"); 
+                OnHealthChange?.Invoke(health, health/maxHealth);
+                print("10");
             }
         }
 
@@ -202,7 +209,7 @@ public class Health : MonoBehaviour
             }
             
         }
-
+        print("11");
     }
 
     

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DentedPixel;
+using DentedPixel.LTExamples; 
 
 public class PanelController : MonoBehaviour
 {

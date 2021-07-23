@@ -9,7 +9,7 @@ public class uiSunIndicator : MonoBehaviour
 
 
 
-    private SunDamage sunDamageManager;
+    public SunDamage sunDamageManager;
     private RectTransform SunDamageRect;
     private RectTransform SunSafeRect;
 
@@ -21,10 +21,10 @@ public class uiSunIndicator : MonoBehaviour
     private float angleToSun2D;
     
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         GameObject player = GameObject.FindGameObjectWithTag("Player");
-        sunDamageManager = player.GetComponentInChildren<SunDamage>();
+        //sunDamageManager = player.GetComponentInChildren<SunDamage>();
 
         SunDamageRect = SunDamage.GetComponent<RectTransform>();
         SunSafeRect = SunSafe.GetComponent<RectTransform>();
@@ -32,7 +32,7 @@ public class uiSunIndicator : MonoBehaviour
         SunDamagePanelCon = SunDamage.GetComponent<PanelController>();
         SunSafePanelCon = SunSafe.GetComponent<PanelController>();
 
-        sunDamageManager.AddSunChangeListener(SunChange);
+        //sunDamageManager.AddSunChangeListener(SunChange);
 
         SunDamagePanelCon.TweenOut();
         SunSafePanelCon.Tween();
@@ -47,12 +47,14 @@ public class uiSunIndicator : MonoBehaviour
             angleToSun2D = sunDamageManager.GetAngleToSun();
 
         }
-
-
+        print("sunDamageManager " + sunDamageManager);
+        print("sunDamageManager IS IN LIGHT  " + sunDamageManager.inSunlight);
+        SunChange(sunDamageManager.inSunlight); 
     }
 
-    void SunChange(bool sunStatus,float direction)
+    void SunChange(bool sunStatus)
     {
+        print("IS SUN UI RUNNING"); 
         if (sunStatus == inSun) return;
 
         inSun = sunStatus;

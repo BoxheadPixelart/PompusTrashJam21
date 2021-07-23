@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro; 
 
 public class SunDamage : MonoBehaviour
 {
 
     public GameObject PlayerObject;
     public GameObject CenterOfMesh;
-    private ShellManager shellManager;
+    public  ShellManager shellManager;
 
     public GameObject DirectionalLightSunReference;
 
@@ -29,9 +30,9 @@ public class SunDamage : MonoBehaviour
     private int sunlightCheckCounter = -1;
     public bool inSunlight;
     private bool prev_in_sunlight = false;
+    public TextMeshProUGUI text; 
 
-
-    private GameObject gameController;
+    public GameObject gameController;
 
     public bool RenderSunLightCheckPoints = false;
     public List<Transform> sunLightCheckPoints;
@@ -68,9 +69,10 @@ public class SunDamage : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        gameController = GameObject.FindGameObjectWithTag("GameController");
+        print("Start has occured"); 
+       // gameController = GameObject.FindGameObjectWithTag("GameController");
 
         sunDPSDelta = SunDPS / 60f;
         sunWithShellDPSDelta = SunWithShellDPS / 60f;
@@ -78,23 +80,24 @@ public class SunDamage : MonoBehaviour
         RestoreHealthInShadeDPSDelta = RestoreHealthInShadeDPS / 60f;
 
 
-        shellManager = gameController.GetComponent<ShellManager>();
+        //     shellManager = gameController.GetComponent<ShellManager>();
 
-        HealthScript = gameController.GetComponent<Health>();
-
-        HealthScript.AddHealthChangeListener(OnHealthChange);
+        //  HealthScript = gameController.GetComponent<Health>();
+        print(HealthScript);
+        print(shellManager); 
+        //HealthScript.AddHealthChangeListener(OnHealthChange);
 
         _health = HealthScript.GetHealth();
-        
+        print(HealthScript + " is the health Ref");
         // We assume the player is starting at max health. This is sloppy.  Do not care
         _max_health = _health;
 
 
 
         // --- Creating the inverted bitmask for the raycast
-        LayerMask acceptedLayersBitMask = 0;
+       // LayerMask acceptedLayersBitMask = 0;
         
-        acceptedLayersBitMask = ~IgnoreTheseLayers;
+       // acceptedLayersBitMask = ~IgnoreTheseLayers;
 
       //  Debug.Log("Ignored Bitmask inverted: " + LayerMask.LayerToName(acceptedLayersBitMask) + " (" + (int)acceptedLayersBitMask + ")");
 
@@ -103,13 +106,14 @@ public class SunDamage : MonoBehaviour
            sclp.GetComponent<Renderer>().enabled = RenderSunLightCheckPoints;
            sclp.GetComponent<MeshRenderer>().enabled = RenderSunLightCheckPoints;
         }
-
+        print("Start has ended");
     }
 
     
     void FixedUpdate()
     {
-        if(inSunlight) // if we're in sunlight, check if we still are right away
+        _health = HealthScript.health; 
+        if (inSunlight) // if we're in sunlight, check if we still are right away
         {
             
             inSunlight = AreWeInSunlight();
@@ -122,24 +126,36 @@ public class SunDamage : MonoBehaviour
             if(sunlightCheckCounter == 0)
             {
                 //Debug.Log("Not in sunlight, checking if things have changed");
+               // PrintLocal("Not in sunlight, checking if things have changed");
                 inSunlight = AreWeInSunlight();
+
             }
             
 
         }
-
+      //  PrintLocal("In Sunlight is: "+ inSunlight);
         // if we're in sunlight, take damage
         if (inSunlight)
         {
+          
             if (shellManager.ShellStatus())
             {
+                print("TAKING DAMAGE SHELLED");
+         
                 HealthScript.SubtractHealth(sunWithShellDPSDelta);
             }
             else
             {
+                print(" 1 TAKING DAMAGE NOT SHELLED");
+                print("2 " + sizzle);
+                print("3 " + HealthScript);
+                print("4 " + sunDPSDelta);
                 HealthScript.SubtractHealth(sunDPSDelta);
-                if (!sizzle.isPlaying)
+                print("5 " + sizzle.isPlaying);
+                if (sizzle.isPlaying != true)
                 {
+                    print("6 ");
+                    print(sizzle);
                     sizzle.Play();
                 }
             
@@ -147,6 +163,7 @@ public class SunDamage : MonoBehaviour
         }
         else if(_health < _max_health)
         {
+           
             HealthScript.AddHealth(RestoreHealthInShadeDPSDelta);
 
         }
@@ -170,7 +187,7 @@ public class SunDamage : MonoBehaviour
         //Quaternion tempAngle = Quaternion.Inverse(DirectionalLightSunReference.transform.rotation);
 
         //angleToSun = tempAngle.eulerAngles.normalized;
-
+     
         angleToSun = DirectionalLightSunReference.transform.forward * -1;
 
         //Debug.Log("ANgle to sun is: " + angleToSun);
@@ -209,13 +226,14 @@ public class SunDamage : MonoBehaviour
 
     private bool _CheckSunlightPoint(Transform slcp)
     {
+      //  PrintLocal("We have Checked for Sun");
         Vector3 worldCoords = transform.TransformPoint(slcp.localPosition);
 
         Vector3 rayDraw = angleToSun * DistanceToRaycast * 50;
 
-        Debug.DrawRay(worldCoords, rayDraw,Color.white, 0.5f, false);
+        //  Debug.DrawRay(worldCoords, rayDraw,Color.white, 0.5f, false);
         //return Physics.Raycast(slcp.position, angleToSun, DistanceToRaycast, acceptedLayersBitMask, QueryTriggerInteraction.Ignore);
-
+      //  PrintLocal("THE SUN STATE IS: " + Physics.Raycast(worldCoords, angleToSun, DistanceToRaycast, acceptedLayersBitMask, QueryTriggerInteraction.Ignore).ToString()); ;;
         return !Physics.Raycast(worldCoords, angleToSun, DistanceToRaycast,acceptedLayersBitMask,QueryTriggerInteraction.Ignore);
 
     }
@@ -236,6 +254,8 @@ public class SunDamage : MonoBehaviour
 
     private void OnHealthChange(float health, float healthPercent)
     {
+      print("SUN DAMAGE IS LISTIEN");  
+
         _health = health;
 
     }
@@ -245,6 +265,7 @@ public class SunDamage : MonoBehaviour
 
         return inSunlight;
     }
+
 
 
 }

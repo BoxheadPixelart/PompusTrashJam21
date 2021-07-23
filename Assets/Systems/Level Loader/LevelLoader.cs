@@ -11,7 +11,12 @@ public class LevelLoader : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
         SceneManager.LoadSceneAsync(2, LoadSceneMode.Additive);
-        
+        SceneManager.LoadSceneAsync(3, LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync(4, LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync(5, LoadSceneMode.Additive);
+
+        SceneManager.LoadSceneAsync(6, LoadSceneMode.Additive);
+       //ceneManager.LoadSceneAsync(7, LoadSceneMode.Additive);
     }
     // Update is called once per frame
     void Update()

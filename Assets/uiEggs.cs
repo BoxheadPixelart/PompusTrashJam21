@@ -13,23 +13,28 @@ public class uiEggs : MonoBehaviour
     private int NumberOfEggs;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         GameObject gameManager = GameObject.FindGameObjectWithTag("GameController");
 
         healthManager = gameManager.GetComponent<Health>();
 
-        healthManager.AddHealthChangeListener(onHealthChange);
-        healthManager.AddEggChangeListener(OnEggChange);
+        //healthManager.AddHealthChangeListener(onHealthChange);
+       // healthManager.AddEggChangeListener(OnEggChange);
 
         NumberOfEggs = healthManager.GetEggs();
-        OnEggChange(NumberOfEggs, 1);
+        OnEggChange(NumberOfEggs);
 
 
 
     }
-
-    private void OnEggChange(int eggNumber,int eggChange)
+    private void Update()
+    {
+        NumberOfEggs = healthManager.GetEggs();
+        OnEggChange(NumberOfEggs);
+        onHealthChange(healthManager.health,healthManager.health/healthManager.maxHealth); 
+    }
+    private void OnEggChange(int eggNumber)
     {
         eggCount.text = eggNumber.ToString();
         NumberOfEggs = eggNumber;

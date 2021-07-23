@@ -22,7 +22,7 @@ public class PostProcessingController : MonoBehaviour
 
     private GameObject PlayerContainerObj;
 
-    private SunDamage sunDamageManager;
+    public SunDamage sunDamageManager;
 
     public float BurningFXMaxAtXPercentHealth = 0.6f;
 
@@ -54,11 +54,12 @@ public class PostProcessingController : MonoBehaviour
 
         PlayerContainerObj = GameObject.FindGameObjectWithTag("Player");
 
-        sunDamageManager = PlayerContainerObj.GetComponentInChildren<SunDamage>();
+        //sunDamageManager = PlayerContainerObj.GetComponentInChildren<SunDamage>();
 
         healthController = gameObject.GetComponent<Health>();
-        healthController.AddHealthChangeListener(OnHealthChange);
-        healthController.AddDeathListener(OnDeath);
+       // print()
+        //healthController.AddHealthChangeListener(OnHealthChange);
+       // healthController.AddDeathListener(OnDeath);
 
         _healthPercent = 1f;
 
@@ -90,7 +91,7 @@ public class PostProcessingController : MonoBehaviour
         }
     }
     */
-
+    /*
     void OnHealthChange(float _health, float _healthPerVal)
     {
         bool in_sun = sunDamageManager.InSunlight();
@@ -105,6 +106,26 @@ public class PostProcessingController : MonoBehaviour
         else
         {
             _healthPercent = Mathf.Clamp(_healthPercent + 0.0125f,0f,1f);
+            _HeatEffect(_healthPercent);
+            if (_healthPercent >= 1f) _healthPercent = 1f;
+        }
+
+    }
+    */
+    private void FixedUpdate()
+    {
+        bool in_sun = sunDamageManager.InSunlight();
+
+        if (in_sun)
+        {
+            float _val = Mathf.Clamp(healthController.health/ healthController.maxHealth, _healthPercent - 0.0155f, _healthPercent + 0.0155f);
+            _HeatEffect(_val);
+            _heatHasFinished = false;
+            _healthPercent = _val;
+        }
+        else
+        {
+            _healthPercent = Mathf.Clamp(_healthPercent + 0.0125f, 0f, 1f);
             _HeatEffect(_healthPercent);
             if (_healthPercent >= 1f) _healthPercent = 1f;
         }

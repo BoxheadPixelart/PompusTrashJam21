@@ -26,7 +26,7 @@ public class npcController : MonoBehaviour
         GameObject __gm = GameObject.FindGameObjectWithTag("GameController");
         respawnManager = __gm.GetComponent<Respawn>();
 
-        shell.SetInteract(false);
+       // shell.SetInteract(false);
         canTalk = true; 
 
 
@@ -61,6 +61,10 @@ public class npcController : MonoBehaviour
     public void CheckItem(ItemBase incoming)
     {
         print(incoming); 
+        if (incoming is null)
+        {
+            return; 
+        }
         if (incoming.itemData.name == goalItem.name)
         {
             AcceptItem(incoming); 
